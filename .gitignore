@@ -1,3 +1,6 @@
 .direnv/
 .envrc
 .env
+*.duckdb
+*.egg-info
+**/__pycache__/**
