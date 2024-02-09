@@ -1,17 +1,28 @@
+""" Demonstrate DuckDB / Snowflake Conditional Usage.
+
+USAGE
+
+    dagster dev -f project_blitz/demo_conditional_database.py
+
+"""
+
+
 import os
 import pandas as pd
 
 
 from dagster import (
-    AssetExecutionContext,
+    Config,
     Definitions,
     EnvVar,
     MaterializeResult,
     MetadataValue,
+    ResourceParam,
     asset,
 )
 from dagster_duckdb import DuckDBResource
 from dagster_snowflake import SnowflakeResource
+from typing import Union
 
 
 snowflake_resource = SnowflakeResource(
@@ -34,33 +45,24 @@ resources = {
 }
 
 
-@asset(
-    required_resource_keys={"database"},
-    compute_kind="DuckDB",
-)
-def foods_schema(context: AssetExecutionContext) -> None:
-    """Foods schema in target database."""
-    with context.resources.database.get_connection() as conn:
-        conn.cursor().execute(
-            """
-            CREATE SCHEMA IF NOT EXISTS foods
-            """
-        )
+class CerealConfig(Config):
+    cereal_csv_path: str = "https://docs.dagster.io/assets/cereal.csv"
 
 
 @asset(
-    deps=[foods_schema],
-    required_resource_keys={"database"},
     compute_kind="DuckDB",
+    group_name="cereal",
 )
-def cereal(context: AssetExecutionContext) -> MaterializeResult:
+def cereal(
+    database: ResourceParam[Union[SnowflakeResource, DuckDBResource]],
+    config: CerealConfig,
+) -> MaterializeResult:
     """Nutrition information for popular cereal brands."""
-    # TODO - parameterize the CSV file
-    df = pd.read_csv("https://docs.dagster.io/assets/cereal.csv")
-    with context.resources.database.get_connection() as conn:
+    df = pd.read_csv(config.cereal_csv_path)
+    with database.get_connection() as conn:
         conn.cursor().execute(
             """
-            CREATE OR REPLACE TABLE foods.cereal
+            CREATE OR REPLACE TABLE cereal
             AS
             SELECT * FROM df
             """
@@ -72,36 +74,37 @@ def cereal(context: AssetExecutionContext) -> MaterializeResult:
     )
 
 
+class HealthyCerealConfig(Config):
+    table_name: str = "healthy_cereal"
+    minimum_protein: int = 4
+    maximum_sugars: int = 6
+
+
 @asset(
     deps=[cereal],
-    required_resource_keys={"database"},
     compute_kind="DuckDB",
+    group_name="cereal",
 )
-def healthy_cereal(context: AssetExecutionContext) -> MaterializeResult:
+def healthy_cereal(
+    database: ResourceParam[Union[SnowflakeResource, DuckDBResource]],
+    config: HealthyCerealConfig,
+) -> None:
     """Nutrition information for _healthy_ cereal brands."""
-    with context.resources.database.get_connection() as conn:
+    with database.get_connection() as conn:
         conn.cursor().execute(
-            """
-            CREATE OR REPLACE TABLE foods.healthy_cereal
+            f"""
+            CREATE OR REPLACE TABLE {config.table_name}
             AS
             SELECT * FROM foods.cereal
             WHERE
-                (1 / cups) * protein >= 4
-                AND (1 / cups) * sugars <= 4
+                (1 / cups) * protein >= {config.minimum_protein}
+                AND (1 / cups) * sugars <= {config.maximum_sugars}
             ORDER BY fiber DESC
             """
         )
 
 
 defs = Definitions(
-    assets=[foods_schema, cereal, healthy_cereal],
+    assets=[cereal, healthy_cereal],
     resources=resources[os.getenv("DAGSTER_ENV", "local")],
 )
-
-
-# References
-#
-# - https://docs.dagster.io/concepts/configuration/config-schema#defining-and-accessing-pythonic-configuration-for-a-resource
-# - https://docs.dagster.io/deployment/dagster-instance#default-local-behavior
-# - https://docs.dagster.io/deployment/dagster-instance#configuration-reference
-# - https://docs.dagster.io/concepts/resources
