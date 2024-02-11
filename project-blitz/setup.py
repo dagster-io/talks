@@ -5,7 +5,10 @@ setup(
     packages=find_packages(exclude=["project_blitz_tests"]),
     install_requires=[
         "dagster",
-        "dagster-cloud"
+        "dagster-cloud",
+        "dagster-duckdb",
+        "dagster-snowflake",
+        "pandas",
     ],
     extras_require={"dev": ["dagster-webserver", "pytest"]},
 )
