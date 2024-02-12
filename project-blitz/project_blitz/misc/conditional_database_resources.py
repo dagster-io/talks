@@ -1,9 +1,4 @@
 """ Demonstrate DuckDB / Snowflake Conditional Usage.
-
-USAGE
-
-    dagster dev -f project_blitz/demo_conditional_database.py
-
 """
 
 
