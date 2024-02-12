@@ -48,8 +48,14 @@ air_quality_resource = CSVResource(location=EnvVar("CSV_NY_AIR_QUALITY_LOCATION"
 ########################################################################################
 
 
-@asset(group_name="reporting")
-def ny_air_quality(database: DuckDBResource, air_quality_csv: CSVResource):
+@asset(
+    group_name="ny_air_quality",
+    compute_kind="DuckDB",
+)
+def ny_air_quality(
+    database: DuckDBResource, air_quality_csv: CSVResource
+) -> MaterializeResult:
+    """New York state Air Quality metrics."""
     df = air_quality_csv.load_dataset()
 
     # normalize column names
@@ -100,8 +106,13 @@ class ReportConfig(Config):
     destination_table: str = "ny_annual_average_report"
 
 
-@asset(deps=[ny_air_quality], group_name="reporting")
+@asset(
+    deps=[ny_air_quality],
+    group_name="ny_air_quality",
+    compute_kind="DuckDB",
+)
 def ny_air_quality_report(database: DuckDBResource, config: ReportConfig):
+    """Top offendors for specific air quality metric."""
     with database.get_connection() as conn:
         conn.cursor().execute(
             f"""
@@ -148,8 +159,8 @@ def ny_air_quality_report(database: DuckDBResource, config: ReportConfig):
 ########################################################################################
 
 air_quality_report_job = define_asset_job(
-    "my_asset_job",
-    AssetSelection.groups("demo_assets"),
+    "air_quality_report",
+    AssetSelection.groups("reporting"),
 )
 
 ########################################################################################
