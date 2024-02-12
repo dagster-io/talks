@@ -20,6 +20,7 @@ def bird_feeders_table(
 ):
     fpath = file_relative_path(__file__, "../data/bird_data/" + config.filename)
     with duckdb.get_connection() as conn:
+        # --- Create a temporary table to hold the new data
         query = f"""
             CREATE OR REPLACE TABLE tmp_bird_feeder AS (
                      select 
@@ -28,23 +29,21 @@ def bird_feeders_table(
                      try_cast(how_many as numeric) as n_obs 
                      from read_csv('{fpath}', sample_size=500000, auto_detect=true)
             )"""
-        context.log.info(query)
         conn.execute(query)
-        context.log.info("Created tmp_bird_feeder view")
 
+        # --- Create the final table if it doesn't exist and remove old data to avoid duplicates
         conn.execute(
             "CREATE TABLE IF NOT EXISTS bird_feeders AS FROM tmp_bird_feeder LIMIT 0"
         )
         conn.execute(f"DELETE FROM bird_feeders WHERE filename = '{fpath}'")
         context.log.info("Deleted old data for %s", fpath)
 
+        # --- Insert the new data and remove the temporary table
         conn.execute("INSERT INTO bird_feeders SELECT * FROM tmp_bird_feeder")
         context.log.info("Inserted new data for %s", fpath)
-
         conn.execute("DROP TABLE tmp_bird_feeder")
 
-        context.log.info("Updated bird_feeders table for %s", fpath)
-
+        # --- Fetch some metadata
         nrows = conn.execute("SELECT COUNT(*) FROM bird_feeders").fetchone()[0]  # type: ignore
         metadata = conn.execute(
             "select * from duckdb_tables() where table_name = 'bird_feeders'"
@@ -118,7 +117,7 @@ def bird_aggregates(context: AssetExecutionContext, duckdb: DuckDBResource):
             )
             """
         )
-        # Get the top 2 rows by year sorted by median
+        # Get the top row by year sorted by median
 
         bird_aggs = conn.execute(
             """
@@ -134,7 +133,7 @@ def bird_aggregates(context: AssetExecutionContext, duckdb: DuckDBResource):
         order by year desc"""
         ).df()
         context.log.info("Created bird_aggregates view")
-        preview = {"preview": MetadataValue.md(bird_aggs.head(3).to_markdown())}  # type: ignore
+        preview = {"preview": MetadataValue.md(bird_aggs.head(5).to_markdown())}  # type: ignore
         context.add_output_metadata(metadata=preview)
 
 
