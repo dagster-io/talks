@@ -4,3 +4,8 @@
 *.duckdb
 *.egg-info
 **/__pycache__/**
+__MACOSX
+*.zip
+*.csv
+.ipynb_checkpoints
+tmp*

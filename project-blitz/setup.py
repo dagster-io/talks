@@ -8,7 +8,10 @@ setup(
         "dagster-cloud",
         "dagster-duckdb",
         "dagster-snowflake",
+        "dagstermill",
         "pandas",
+        "seaborn",
+        "matplotlib",
     ],
-    extras_require={"dev": ["dagster-webserver", "pytest"]},
+    extras_require={"dev": ["dagster-webserver", "pytest", "ruff"]},
 )
