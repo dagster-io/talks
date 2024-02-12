@@ -3,8 +3,10 @@ import pandas as pd
 
 from dagster import MaterializeResult, IntMetadataValue
 from dagster_duckdb import DuckDBResource
-from project_blitz.demo_ny_air_quality import (
+from project_blitz.resources_and_configurations.resources import (
     CSVResource,
+)
+from project_blitz.resources_and_configurations.assets import (
     ReportConfig,
     ny_air_quality,
     ny_air_quality_report,

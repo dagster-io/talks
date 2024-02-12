@@ -1,51 +1,12 @@
-""" Demonstrate Assets & Configurations with NY Air Quality Reporting.
-
-USAGE
-
-    dagster dev -f project_blitz/demo_ny_air_quality.py
-
-"""
-
 from dagster import (
-    AssetSelection,
     Config,
-    ConfigurableResource,
-    Definitions,
-    EnvVar,
     MaterializeResult,
     MetadataValue,
-    RunConfig,
-    ScheduleDefinition,
     asset,
-    define_asset_job,
 )
 
 from dagster_duckdb import DuckDBResource
-from pandas.io.feather_format import pd
-from pydantic import Field
-
-
-########################################################################################
-#                                      Resources                                       #
-########################################################################################
-
-duckdb_resource = DuckDBResource(database=EnvVar("DUCKDB_DATABASE"))
-
-
-class CSVResource(ConfigurableResource):
-    location: str = Field(description=("Path to CSV (file:// or https://)"))
-
-    def load_dataset(self) -> pd.DataFrame:
-        return pd.read_csv(self.location)
-
-
-# City of New York - Air Quality - https://catalog.data.gov/dataset/air-quality
-air_quality_resource = CSVResource(location=EnvVar("CSV_NY_AIR_QUALITY_LOCATION"))
-
-
-########################################################################################
-#                                        Assets                                        #
-########################################################################################
+from .resources import CSVResource
 
 
 @asset(
@@ -58,7 +19,6 @@ def ny_air_quality(
     """New York state Air Quality metrics."""
     df = air_quality_csv.load_dataset()
 
-    # normalize column names
     df.columns = [c.lower().replace(" ", "_") for c in df.columns]
 
     with database.get_connection() as conn:
@@ -153,51 +113,3 @@ def ny_air_quality_report(database: DuckDBResource, config: ReportConfig):
 # ├────────────────────────┴──────────────────────────────────────┴──────────────┴────────────┤
 # │ 10 rows                                                                         4 columns │
 # └───────────────────────────────────────────────────────────────────────────────────────────┘
-
-########################################################################################
-#                                         Jobs                                         #
-########################################################################################
-
-air_quality_report_job = define_asset_job(
-    "air_quality_report",
-    AssetSelection.groups("reporting"),
-)
-
-########################################################################################
-#                                      Schedules                                       #
-########################################################################################
-
-my_job_hourly = ScheduleDefinition(
-    name="custom_hourly_job",
-    job=air_quality_report_job,
-    cron_schedule="0 * * * *",  # Every hour
-    run_config=RunConfig(ops={"ny_air_quality_report": ReportConfig()}),
-)
-
-my_job_daily = ScheduleDefinition(
-    name="custom_daily_job",
-    job=air_quality_report_job,
-    cron_schedule="0 0 * * *",  # At 12:00 AM UTC
-    run_config=RunConfig(
-        ops={
-            "ny_air_quality_report": ReportConfig(
-                limit=1000, destination_table="ny_annual_average_report_1000"
-            )
-        }
-    ),
-)
-
-
-########################################################################################
-#                                     Definitions                                      #
-########################################################################################
-
-defs = Definitions(
-    assets=[ny_air_quality, ny_air_quality_report],
-    jobs=[air_quality_report_job],
-    schedules=[my_job_hourly, my_job_daily],
-    resources={
-        "database": duckdb_resource,
-        "air_quality_csv": air_quality_resource,
-    },
-)
