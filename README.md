@@ -18,4 +18,4 @@ Explore the concepts of _automation_ on the Dagster platform through cron-based
 schedules, sensors, and auto-materialization policies.
 
 - [Example Code](https://github.com/dagster-io/devrel-project-demos/tree/main/project-blitz/project_blitz/automation)
-- [Presentation Slide-deck]()
+- [Presentation Slide-deck](https://github.com/dagster-io/devrel-project-demos/blob/main/slides/01-automation/Automation.pdf)
