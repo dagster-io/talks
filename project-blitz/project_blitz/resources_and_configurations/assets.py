@@ -22,19 +22,37 @@ def ny_air_quality(
     df.columns = [c.lower().replace(" ", "_") for c in df.columns]
 
     with database.get_connection() as conn:
-        conn.cursor().execute(
+        conn.execute(
             """
             CREATE OR REPLACE TABLE ny_air_quality
             AS
             SELECT * FROM df
             """
         )
+
+        metadata = conn.execute(
+            """
+            SELECT
+              table_name,
+              database_name,
+              schema_name,
+              column_count,
+              estimated_size
+            FROM duckdb_tables()
+            WHERE table_name = 'ny_air_quality'
+            """
+        ).fetchall()
+
     return MaterializeResult(
         metadata={
-            "rows": MetadataValue.int(df.shape[0]),
+            "num_rows": MetadataValue.int(df.shape[0]),
+            "table_name": metadata[0][0],
+            "database_name": metadata[0][1],
+            "schema_name": metadata[0][2],
+            "column_count": metadata[0][3],
+            "estimated_size": metadata[0][4],
         }
     )
-
 
 # ┌────────────────┬─────────────┬─────────┬─────────┬─────────┬───────┐
 # │  column_name   │ column_type │  null   │   key   │ default │ extra │
@@ -59,7 +77,6 @@ def ny_air_quality(
 
 # Demonstrate the use of `Config` with an Asset
 
-
 class ReportConfig(Config):
     limit: int = 10
     measure_type: str = "Nitrogen dioxide (NO2)"
@@ -74,7 +91,7 @@ class ReportConfig(Config):
 def ny_air_quality_report(database: DuckDBResource, config: ReportConfig):
     """Top offendors for specific air quality metric."""
     with database.get_connection() as conn:
-        conn.cursor().execute(
+        conn.execute(
             f"""
             CREATE OR REPLACE TABLE {config.destination_table} AS
             SELECT
@@ -95,6 +112,28 @@ def ny_air_quality_report(database: DuckDBResource, config: ReportConfig):
             """
         )
 
+        metadata = conn.execute(
+            """
+            SELECT
+              table_name,
+              database_name,
+              schema_name,
+              column_count,
+              estimated_size
+            FROM duckdb_tables()
+            WHERE table_name = 'ny_air_quality'
+            """
+        ).fetchall()
+
+    return MaterializeResult(
+        metadata={
+            "table_name": metadata[0][0],
+            "database_name": metadata[0][1],
+            "schema_name": metadata[0][2],
+            "column_count": metadata[0][3],
+            "estimated_size": metadata[0][4],
+        }
+    )
 
 # ┌────────────────────────┬──────────────────────────────────────┬──────────────┬────────────┐
 # │          name          │            geo_place_name            │ measure_info │ mean_value │
