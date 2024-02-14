@@ -1,17 +1,19 @@
-# project_blitz
+# Feature Blitz
 
 ## Usage
 
-
 Install dependencies with: 
 
-```
+```shell
 make install
 ```
 
-Run a specific example with (note you must run from the `project-blitz` root directory for environment
-variables to take effect.
+Run a specific example with (note you must run from the `project-blitz` root directory for environment variables to take effect.
 
-```
-dagster dev -f project_blitz/file.py
+```shell
+dagster dev -m project_blitz.automation
+
+# or
+
+dagster dev -m project_blitz.resources_and_configurations
 ```
