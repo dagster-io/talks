@@ -1,7 +1,6 @@
 from dagster import (
     Config,
     MaterializeResult,
-    MetadataValue,
     asset,
 )
 
@@ -27,6 +26,8 @@ def ny_air_quality(
 
     with database.get_connection() as conn:
         conn.execute(
+            # NOTE: beware of SQL injection; unable to find support for the psycopg2
+            # equivalent of sql.Identifiers for DuckDB
             f"""
             CREATE OR REPLACE TABLE {config.destination_table}
             AS
@@ -49,7 +50,6 @@ def ny_air_quality(
 
     return MaterializeResult(
         metadata={
-            "num_rows": MetadataValue.int(df.shape[0]),
             "table_name": metadata[0][0],
             "database_name": metadata[0][1],
             "schema_name": metadata[0][2],
@@ -57,7 +57,6 @@ def ny_air_quality(
             "estimated_size": metadata[0][4],
         }
     )
-
 
 # ┌────────────────┬─────────────┬─────────┬─────────┬─────────┬───────┐
 # │  column_name   │ column_type │  null   │   key   │ default │ extra │
@@ -86,6 +85,7 @@ def ny_air_quality(
 class ReportConfig(Config):
     limit: int = 10
     measure_type: str = "Nitrogen dioxide (NO2)"
+    source_table: str = "ny_air_quality"
     destination_table: str = "ny_annual_average_report"
 
 
@@ -105,7 +105,7 @@ def ny_air_quality_report(database: DuckDBResource, config: ReportConfig):
               geo_place_name,
               measure_info,
               round(mean(data_value), 2) as mean_value
-            FROM ny_air_quality
+            FROM {config.source_table}
             WHERE
               time_period like 'Annual Average %'
               AND name = '{config.measure_type}'
@@ -119,7 +119,7 @@ def ny_air_quality_report(database: DuckDBResource, config: ReportConfig):
         )
 
         metadata = conn.execute(
-            """
+            f"""
             SELECT
               table_name,
               database_name,
@@ -127,7 +127,7 @@ def ny_air_quality_report(database: DuckDBResource, config: ReportConfig):
               column_count,
               estimated_size
             FROM duckdb_tables()
-            WHERE table_name = 'ny_air_quality'
+            WHERE table_name = '{config.destination_table}'
             """
         ).fetchall()
 
@@ -140,7 +140,6 @@ def ny_air_quality_report(database: DuckDBResource, config: ReportConfig):
             "estimated_size": metadata[0][4],
         }
     )
-
 
 # ┌────────────────────────┬──────────────────────────────────────┬──────────────┬────────────┐
 # │          name          │            geo_place_name            │ measure_info │ mean_value │
