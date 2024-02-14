@@ -1,10 +1,7 @@
-from dagster import (
-    AssetSelection,
-    define_asset_job,
-)
+from dagster import define_asset_job
 
 
 air_quality_report_job = define_asset_job(
     "air_quality_report",
-    AssetSelection.groups("reporting"),
+    ["ny_air_quality", "ny_air_quality_report"],
 )

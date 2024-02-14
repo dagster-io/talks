@@ -8,7 +8,6 @@ report_hourly = ScheduleDefinition(
     name="custom_hourly_job",
     job=air_quality_report_job,
     cron_schedule="0 * * * *",  # Every hour
-    run_config=RunConfig(ops={"ny_air_quality_report": ReportConfig()}),
 )
 
 report_daily = ScheduleDefinition(
@@ -21,5 +20,5 @@ report_daily = ScheduleDefinition(
                 limit=1000, destination_table="ny_annual_average_report_1000"
             )
         }
-    ),
+    ).to_config_dict(),
 )
