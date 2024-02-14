@@ -9,12 +9,16 @@ from dagster_duckdb import DuckDBResource
 from .resources import CSVResource
 
 
+class NYAirQualityConfig(Config):
+    destination_table: str = "ny_air_quality"
+
+
 @asset(
     group_name="ny_air_quality",
     compute_kind="DuckDB",
 )
 def ny_air_quality(
-    database: DuckDBResource, air_quality_csv: CSVResource
+    database: DuckDBResource, air_quality_csv: CSVResource, config: NYAirQualityConfig
 ) -> MaterializeResult:
     """New York state Air Quality metrics."""
     df = air_quality_csv.load_dataset()
@@ -23,15 +27,15 @@ def ny_air_quality(
 
     with database.get_connection() as conn:
         conn.execute(
-            """
-            CREATE OR REPLACE TABLE ny_air_quality
+            f"""
+            CREATE OR REPLACE TABLE {config.destination_table}
             AS
             SELECT * FROM df
             """
         )
 
         metadata = conn.execute(
-            """
+            f"""
             SELECT
               table_name,
               database_name,
@@ -39,7 +43,7 @@ def ny_air_quality(
               column_count,
               estimated_size
             FROM duckdb_tables()
-            WHERE table_name = 'ny_air_quality'
+            WHERE table_name = '{config.destination_table}'
             """
         ).fetchall()
 
@@ -53,6 +57,7 @@ def ny_air_quality(
             "estimated_size": metadata[0][4],
         }
     )
+
 
 # ┌────────────────┬─────────────┬─────────┬─────────┬─────────┬───────┐
 # │  column_name   │ column_type │  null   │   key   │ default │ extra │
@@ -76,6 +81,7 @@ def ny_air_quality(
 
 
 # Demonstrate the use of `Config` with an Asset
+
 
 class ReportConfig(Config):
     limit: int = 10
@@ -134,6 +140,7 @@ def ny_air_quality_report(database: DuckDBResource, config: ReportConfig):
             "estimated_size": metadata[0][4],
         }
     )
+
 
 # ┌────────────────────────┬──────────────────────────────────────┬──────────────┬────────────┐
 # │          name          │            geo_place_name            │ measure_info │ mean_value │
