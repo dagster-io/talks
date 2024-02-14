@@ -12,10 +12,12 @@ to us on [Slack](https://dagster.io/slack), or through a GitHub Issue / Discussi
 
 ## Feature Blitz
 
-### 2024.02.13 - Automations
+| Date       | Presentation | Description                                                                                                                            | Code        | Slides        |
+|------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------|-------------|---------------|
+| 2024.02.13 | Automations  | Explore the concepts of _automation_ on the Dagster platform through cron-based schedules, sensors, and auto-materialization policies. | [[code]][1] | [[slides]][2] |
+| 2024.02.20 | Configurations & Resources  | Learn how to a build a platform that promotes re-usability and extensibility with configurations and resources. | [[code]][3] | [[slides]][4] |
 
-Explore the concepts of _automation_ on the Dagster platform through cron-based
-schedules, sensors, and auto-materialization policies.
-
-- [Example Code](https://github.com/dagster-io/devrel-project-demos/tree/main/project-blitz/project_blitz/automation)
-- [Presentation Slide-deck](https://github.com/dagster-io/devrel-project-demos/blob/main/slides/01-automation/Automation.pdf)
+[1]: https://github.com/dagster-io/devrel-project-demos/tree/main/project-blitz/project_blitz/automation
+[2]: https://github.com/dagster-io/devrel-project-demos/blob/main/slides/01-automation/Automation.pdf
+[3]: https://github.com/dagster-io/devrel-project-demos/tree/main/project-blitz/project_blitz/resources_and_configurations
+[4]: https://github.com/dagster-io/devrel-project-demos/blob/main/slides/todo.pdf
