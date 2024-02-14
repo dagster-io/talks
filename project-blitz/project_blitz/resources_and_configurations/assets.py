@@ -1,6 +1,7 @@
 from dagster import (
     Config,
     MaterializeResult,
+    MetadataValue,
     asset,
 )
 
@@ -57,6 +58,7 @@ def ny_air_quality(
             "estimated_size": metadata[0][4],
         }
     )
+
 
 # ┌────────────────┬─────────────┬─────────┬─────────┬─────────┬───────┐
 # │  column_name   │ column_type │  null   │   key   │ default │ extra │
@@ -118,6 +120,12 @@ def ny_air_quality_report(database: DuckDBResource, config: ReportConfig):
             """
         )
 
+        results = conn.execute(
+            f"""
+            SELECT * FROM {config.destination_table}
+            """
+        ).df()
+
         metadata = conn.execute(
             f"""
             SELECT
@@ -138,6 +146,7 @@ def ny_air_quality_report(database: DuckDBResource, config: ReportConfig):
             "schema_name": metadata[0][2],
             "column_count": metadata[0][3],
             "estimated_size": metadata[0][4],
+            "preview": MetadataValue.md(str(results.head(5).to_markdown())),
         }
     )
 
