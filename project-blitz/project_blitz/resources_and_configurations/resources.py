@@ -17,5 +17,4 @@ class CSVResource(ConfigurableResource):
         return pd.read_csv(self.location)
 
 
-# City of New York - Air Quality - https://catalog.data.gov/dataset/air-quality
-air_quality_resource = CSVResource(location=EnvVar("CSV_NY_AIR_QUALITY_LOCATION"))
+air_quality_resource = CSVResource(location=EnvVar("NY_AIR_QUALITY_CSV"))

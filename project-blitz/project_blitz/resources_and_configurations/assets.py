@@ -60,30 +60,6 @@ def ny_air_quality(
     )
 
 
-# ┌────────────────┬─────────────┬─────────┬─────────┬─────────┬───────┐
-# │  column_name   │ column_type │  null   │   key   │ default │ extra │
-# │    varchar     │   varchar   │ varchar │ varchar │ varchar │ int32 │
-# ├────────────────┼─────────────┼─────────┼─────────┼─────────┼───────┤
-# │ unique_id      │ BIGINT      │ YES     │         │         │       │
-# │ indicator_id   │ BIGINT      │ YES     │         │         │       │
-# │ name           │ VARCHAR     │ YES     │         │         │       │
-# │ measure        │ VARCHAR     │ YES     │         │         │       │
-# │ measure_info   │ VARCHAR     │ YES     │         │         │       │
-# │ geo_type_name  │ VARCHAR     │ YES     │         │         │       │
-# │ geo_join_id    │ BIGINT      │ YES     │         │         │       │
-# │ geo_place_name │ VARCHAR     │ YES     │         │         │       │
-# │ time_period    │ VARCHAR     │ YES     │         │         │       │
-# │ start_date     │ VARCHAR     │ YES     │         │         │       │
-# │ data_value     │ DOUBLE      │ YES     │         │         │       │
-# │ message        │ DOUBLE      │ YES     │         │         │       │
-# ├────────────────┴─────────────┴─────────┴─────────┴─────────┴───────┤
-# │ 12 rows                                                  6 columns │
-# └────────────────────────────────────────────────────────────────────┘
-
-
-# Demonstrate the use of `Config` with an Asset
-
-
 class ReportConfig(Config):
     limit: int = 10
     measure_type: str = "Nitrogen dioxide (NO2)"
@@ -149,21 +125,3 @@ def ny_air_quality_report(database: DuckDBResource, config: ReportConfig):
             "preview": MetadataValue.md(str(results.head(5).to_markdown())),
         }
     )
-
-# ┌────────────────────────┬──────────────────────────────────────┬──────────────┬────────────┐
-# │          name          │            geo_place_name            │ measure_info │ mean_value │
-# │        varchar         │               varchar                │   varchar    │   double   │
-# ├────────────────────────┼──────────────────────────────────────┼──────────────┼────────────┤
-# │ Nitrogen dioxide (NO2) │ Midtown (CD5)                        │ ppb          │      34.93 │
-# │ Nitrogen dioxide (NO2) │ Gramercy Park - Murray Hill          │ ppb          │      32.63 │
-# │ Nitrogen dioxide (NO2) │ Chelsea - Clinton                    │ ppb          │      30.66 │
-# │ Nitrogen dioxide (NO2) │ Stuyvesant Town and Turtle Bay (CD6) │ ppb          │      30.36 │
-# │ Nitrogen dioxide (NO2) │ Chelsea-Village                      │ ppb          │      29.53 │
-# │ Nitrogen dioxide (NO2) │ Upper East Side-Gramercy             │ ppb          │      29.39 │
-# │ Nitrogen dioxide (NO2) │ Clinton and Chelsea (CD4)            │ ppb          │      28.42 │
-# │ Nitrogen dioxide (NO2) │ Financial District (CD1)             │ ppb          │      28.13 │
-# │ Nitrogen dioxide (NO2) │ Lower Manhattan                      │ ppb          │      28.06 │
-# │ Nitrogen dioxide (NO2) │ Greenwich Village and Soho (CD2)     │ ppb          │      27.31 │
-# ├────────────────────────┴──────────────────────────────────────┴──────────────┴────────────┤
-# │ 10 rows                                                                         4 columns │
-# └───────────────────────────────────────────────────────────────────────────────────────────┘
