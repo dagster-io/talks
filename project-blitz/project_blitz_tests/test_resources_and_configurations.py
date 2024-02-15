@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 
-from dagster import MaterializeResult, IntMetadataValue
+from dagster import MaterializeResult
 from dagster_duckdb import DuckDBResource
 from project_blitz.resources_and_configurations.resources import (
     CSVResource,
@@ -45,7 +45,13 @@ def test_asset_ny_air_quality(database_path):
     materialize_result = ny_air_quality(duckdb_resource, csv_resource)
     assert materialize_result == MaterializeResult(
         asset_key=None,
-        metadata={"rows": IntMetadataValue(value=5)},
+        metadata={
+            "table_name": "ny_air_quality",
+            "database_name": "data",
+            "schema_name": "main",
+            "column_count": 12,
+            "estimated_size": 5,
+        },
         check_results=[],
         data_version=None,
     )
