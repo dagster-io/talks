@@ -17,4 +17,16 @@ class CSVResource(ConfigurableResource):
         return pd.read_csv(self.location)
 
 
-air_quality_resource = CSVResource(location=EnvVar("NY_AIR_QUALITY_CSV"))
+env = str(EnvVar("ENVIRONMENT").get_value())
+
+NY_AQ_SAMPLE = "data/ny-air-quality-sample.csv"
+NY_AQ = "https://data.cityofnewyork.us/api/views/c3uy-2p5r/rows.csv"
+
+csv_locations = {
+    "local": NY_AQ_SAMPLE,
+    "staging": NY_AQ,
+    "production": NY_AQ,
+    "branch": NY_AQ,
+}
+
+air_quality_resource = CSVResource(location=csv_locations.get(env, NY_AQ))

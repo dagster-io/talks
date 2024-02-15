@@ -18,7 +18,7 @@ report_daily = ScheduleDefinition(
         ops={
             "ny_air_quality_report": ReportConfig(
                 limit=100,
-                destination_table="ny_annual_average_report_1000",
+                destination_table="ny_annual_average_report_100",
                 measure_type="Fine particles (PM 2.5)",
             )
         }
