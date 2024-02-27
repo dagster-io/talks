@@ -54,7 +54,7 @@ def dim_destinations():
     deps=[
         dim_customers, dim_promotions, dim_destinations,
         AssetDep(
-            'dim_items',
+            dim_items,
             partition_mapping=AllPartitionMapping()
         )
     ],
@@ -76,7 +76,7 @@ def fct_orders(context: AssetExecutionContext) -> MaterializeResult:
     deps=[
         AssetDep(
             fct_orders,
-            partition_mapping=TimeWindowPartitionMapping()
+            partition_mapping=TimeWindowPartitionMapping() # Note: Talk about what partition mappings is
         )
     ],
     partitions_def=daily_partition,
