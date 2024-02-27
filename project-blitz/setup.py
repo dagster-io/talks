@@ -12,6 +12,7 @@ setup(
         "pandas",
         "seaborn",
         "matplotlib",
+        "Faker",
     ],
     extras_require={"dev": ["dagster-webserver", "pytest", "ruff"]},
 )
