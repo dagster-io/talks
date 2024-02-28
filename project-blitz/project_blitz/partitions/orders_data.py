@@ -1,4 +1,3 @@
-import time
 from faker import Faker
 import random
 import pandas as pd
@@ -179,8 +178,6 @@ def get_fct_orders(start_date: datetime = MIN_DATE, end_date: datetime = MAX_DAT
         fct_orders_df: DataFrame = pd.DataFrame(fct_orders, columns=['order_id', 'customer_id', 'item_id', 'order_date', 'quantity', 'amount', 'promotion_id', 'destination_id'])
         fct_orders_df.to_parquet(f'data/fct_orders/{year}-{month:02d}-fct_orders.parquet', index=False)
         print(f'data/fct_orders/{year}-{month:02d}-fct_orders.parquet')
-
-        time.sleep(0.2)
 
         current_date = increment_month(current_date)
 
