@@ -8,7 +8,7 @@ category_partition = StaticPartitionsDefinition(
     ['Electronics', 'Clothing', 'Books', 'Home', 'Sports']
 )
 
-START_DATE = '2023-11-01'
+START_DATE = '2020-01-01'
 
 daily_partition = DailyPartitionsDefinition(start_date=START_DATE)
 weekly_partition = WeeklyPartitionsDefinition(start_date=START_DATE)
@@ -81,6 +81,9 @@ def fct_orders(context: AssetExecutionContext) -> MaterializeResult:
     Monthly partitioned fact table for orders.
     """
     start_date, end_date = context.partition_time_window
+
+    context.log.info(f'Getting orders from {start_date} to {end_date}')
+
     data = get_fct_orders(start_date=start_date, end_date=end_date)
 
     return MaterializeResult(
