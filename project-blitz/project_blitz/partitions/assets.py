@@ -1,8 +1,5 @@
-
 from dagster import MaterializeResult, MetadataValue, asset, AutoMaterializePolicy, AssetDep, BackfillPolicy, WeeklyPartitionsDefinition, MonthlyPartitionsDefinition, StaticPartitionsDefinition, AssetExecutionContext, AllPartitionMapping, TimeWindowPartitionMapping, DailyPartitionsDefinition
 
-import requests
-import json
 import os
 
 from .orders_data import get_dim_customers, get_dim_items, get_dim_promotions, get_dim_destinations, get_fct_orders, load_data
@@ -11,19 +8,29 @@ category_partition = StaticPartitionsDefinition(
     ['Electronics', 'Clothing', 'Books', 'Home', 'Sports']
 )
 
-daily_partition = DailyPartitionsDefinition(start_date='2020-01-01')
-weekly_partition = WeeklyPartitionsDefinition(start_date='2020-01-01')
-monthly_partition = MonthlyPartitionsDefinition(start_date='2020-01-01')
+START_DATE = '2020-01-01'
+
+daily_partition = DailyPartitionsDefinition(start_date=START_DATE)
+weekly_partition = WeeklyPartitionsDefinition(start_date=START_DATE)
+monthly_partition = MonthlyPartitionsDefinition(start_date=START_DATE)
 
 
-@asset
+@asset(compute_kind="Snowflake", group_name="marts")
 def dim_customers():
+    """
+    Table of customers and their information
+    """
     get_dim_customers()
 
 @asset(
+    compute_kind="Snowflake",
     partitions_def=category_partition,
+    group_name="marts"
 )
 def dim_items(context: AssetExecutionContext):
+    """
+    Items for sale, by category (ex. Electronics, Clothing, Books, Home, Sports)
+    """
     metadata = {}
 
     category = context.partition_key
@@ -42,27 +49,41 @@ def dim_items(context: AssetExecutionContext):
 
     return MaterializeResult(metadata=metadata)
 
-@asset
+@asset(compute_kind="Snowflake", group_name="marts")
 def dim_promotions():
+    """
+    Historical record of sales, discount codes, and promotions
+    """
     get_dim_promotions()
 
-@asset
+@asset(compute_kind="Snowflake", group_name="marts")
 def dim_destinations():
+    """
+    Where orders are being shipped to
+    """
     get_dim_destinations()
 
 @asset(
+    compute_kind="Snowflake",
     deps=[
         dim_customers, dim_promotions, dim_destinations,
         AssetDep(
-            'dim_items',
+            dim_items,
             partition_mapping=AllPartitionMapping()
         )
     ],
     partitions_def=monthly_partition,
-    backfill_policy=BackfillPolicy.single_run()
+    backfill_policy=BackfillPolicy.single_run(),
+    group_name="marts"
 )
 def fct_orders(context: AssetExecutionContext) -> MaterializeResult:
+    """
+    Monthly partitioned fact table for orders.
+    """
     start_date, end_date = context.partition_time_window
+
+    context.log.info(f'Getting orders from {start_date} to {end_date}')
+
     data = get_fct_orders(start_date=start_date, end_date=end_date)
 
     return MaterializeResult(
@@ -76,15 +97,20 @@ def fct_orders(context: AssetExecutionContext) -> MaterializeResult:
     deps=[
         AssetDep(
             fct_orders,
-            partition_mapping=TimeWindowPartitionMapping()
+            partition_mapping=TimeWindowPartitionMapping() # Note: Talk about what partition mappings is
         )
     ],
     partitions_def=daily_partition,
+    compute_kind="Python",
+    group_name="metrics",
     auto_materialize_policy=AutoMaterializePolicy.eager(
         max_materializations_per_minute=900
     )
 )
 def daily_top_items(context: AssetExecutionContext) -> MaterializeResult:
+    """
+    The best performing items for the day
+    """
     start_date, end_date = context.partition_time_window
     orders = load_data('fct_orders', start_date=start_date, end_date=end_date)
     items = load_data('dim_items')
@@ -116,11 +142,16 @@ def daily_top_items(context: AssetExecutionContext) -> MaterializeResult:
         )
     ],
     partitions_def=weekly_partition,
+    compute_kind="Python",
+    group_name="metrics",
     auto_materialize_policy=AutoMaterializePolicy.eager(
         max_materializations_per_minute=90
     )
 )
 def weekly_top_items(context: AssetExecutionContext) -> MaterializeResult:
+    """
+    The best performing items for the week, aggregated from the daily metrics
+    """
     start_date, end_date = context.partition_time_window
     orders = load_data('fct_orders', start_date=start_date, end_date=end_date)
     items = load_data('dim_items')
@@ -153,11 +184,16 @@ def weekly_top_items(context: AssetExecutionContext) -> MaterializeResult:
         )
     ],
     partitions_def=monthly_partition,
+    compute_kind="Python",
+    group_name="metrics",
     auto_materialize_policy=AutoMaterializePolicy.eager(
         max_materializations_per_minute=90
     )
 )
 def monthly_top_items(context: AssetExecutionContext) -> MaterializeResult:
+    """
+    The best performing items for the month, aggregated from the weekly metrics
+    """
     start_date, end_date = context.partition_time_window
     orders = load_data('fct_orders', start_date=start_date, end_date=end_date)
     items = load_data('dim_items')
@@ -181,30 +217,3 @@ def monthly_top_items(context: AssetExecutionContext) -> MaterializeResult:
             "top_5_items": MetadataValue.json(top_5_items)
         }
     )
-
-# @asset(
-#     deps=[fct_orders, dim_items],
-# )
-# def category_revenue() -> MaterializeResult:
-#     fct_orders = load_data('fct_orders')
-#     dim_items = load_data('dim_items')
-#     category_revenue = {}
-
-#     for category, group in fct_orders.merge(dim_items, on='item_id').groupby('category'):
-#         category_revenue[category] = group['amount'].sum()
-
-#     labels = list(category_revenue.keys())
-#     values = list(category_revenue.values())
-
-#     data = {"type": "bar", "data": {"labels": labels, "datasets": [{"label": "Category Revenue", "data": values, "backgroundColor": "rgba(75, 192, 192, 0.2)", "borderColor": "rgba(75, 192, 192, 1)", "borderWidth": 1}]}, "options": {"scales": {"y": {"beginAtZero": True}}}}
-
-#     response = requests.get("https://quickchart.io/chart?c=" + json.dumps(data))
-
-#     with open("data/category_revenue.png", "wb") as f:
-#         f.write(response.content)
-
-#     return MaterializeResult(
-#         metadata={
-#             "entry_data": MetadataValue.url(response.url)
-#         }
-#     )
