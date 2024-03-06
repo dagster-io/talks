@@ -27,4 +27,4 @@ to us on [Slack](https://dagster.io/slack), or through a GitHub Issue / Discussi
 [5]: https://github.com/dagster-io/devrel-project-demos/tree/main/dagster-deep-dives/dagster_deep_dives/partitions
 [6]: https://github.com/dagster-io/devrel-project-demos/blob/main/slides/03-thinking-in-partitions/thinking-in-partitions.pdf
 
-See [feature-blitz/README.md](./feature-blitz/README.md) for more information.
+See [dagster-deep-dives/README.md](./dagster-deep-dives/README.md) for more information.
