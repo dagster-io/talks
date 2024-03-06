@@ -1,8 +1,8 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="project_blitz",
-    packages=find_packages(exclude=["project_blitz_tests"]),
+    name="dagster_deep_dives",
+    packages=find_packages(exclude=["dagster_deep_dives_tests"]),
     install_requires=[
         "dagster",
         "dagster-cloud",

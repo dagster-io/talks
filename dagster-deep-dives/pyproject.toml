@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [tool.dagster]
-module_name = "project_blitz"
+module_name = "dagster_deep_dives"
 
 [tool.ruff.lint.isort]
 

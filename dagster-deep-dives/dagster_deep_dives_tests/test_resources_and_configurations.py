@@ -3,10 +3,10 @@ import pandas as pd
 
 from dagster import MaterializeResult
 from dagster_duckdb import DuckDBResource
-from project_blitz.resources_and_configurations.resources import (
+from dagster_deep_dives.resources_and_configurations.resources import (
     CSVResource,
 )
-from project_blitz.resources_and_configurations.assets import (
+from dagster_deep_dives.resources_and_configurations.assets import (
     ReportConfig,
     ny_air_quality,
     ny_air_quality_report,
@@ -15,7 +15,7 @@ from project_blitz.resources_and_configurations.assets import (
 
 def test_csv_resource_to_dataframe():
     csv_resource = CSVResource(
-        location="./project_blitz_tests/ny_air_quality_sample.csv"
+        location="./dagster_deep_dives_tests/ny_air_quality_sample.csv"
     )
     df = csv_resource.load_dataset()
     assert type(df) == pd.DataFrame
@@ -38,7 +38,7 @@ def database_path(tmpdir_factory):
 def test_asset_ny_air_quality(database_path):
     duckdb_resource = DuckDBResource(database=database_path)
     csv_resource = CSVResource(
-        location="./project_blitz_tests/ny_air_quality_sample.csv"
+        location="./dagster_deep_dives_tests/ny_air_quality_sample.csv"
     )
 
     # ensure metadata is correctly stored on the `MaterializeResult`
