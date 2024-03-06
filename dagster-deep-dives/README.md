@@ -6,7 +6,7 @@ Install dependencies with:
 
 ```shell
 make install
-
+```
 
 Run a specific example with (note you must run from the `dagster-deep-dives` root directory for environment variables to take effect.
 
