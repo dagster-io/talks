@@ -1,17 +1,17 @@
-from setuptools import setup
+from setuptools import find_packages, setup
 
 setup(
     name="motherduck_dagster_hybrid",
+    packages=find_packages(),
     install_requires=[
-        "duckdb",
         "dagster",
-        "dagster-webserver",
         "dagster-dbt",
         "dagster-duckdb",
-        "duckdb",
+        "dagster-webserver",
+        "dbt-duckdb",
+        "duckdb==v0.9.2",
         "polars",
         "pyarrow",
-        "dbt-duckdb",
     ],
     extras_require={"dev": ["dagster-webserver", "pytest"]},
 )

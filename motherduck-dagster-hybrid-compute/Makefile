@@ -6,14 +6,14 @@ clean:
 	rm -rf ./data/raw/*
 
 install:
-	pip install -e .'[dev]'
-
-reports-install:
-	cd dbt_project && npm --prefix ./reports install
-	cd ..
+	pip install -e '.[dev]'
 
 dev:
 	dagster dev
 
-run-evidence:
+evidence-install:
+	cd dbt_project && npm --prefix ./reports install
+	cd ..
+
+evidence-run:
 	cd dbt_project && npm --prefix ./reports run dev -- --port 4000
