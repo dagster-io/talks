@@ -1,4 +1,4 @@
-dbirdt:
+motherduck-dagster-hybrid:
   target: dev
   outputs:
     dev:
