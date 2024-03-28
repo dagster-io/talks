@@ -1,0 +1,10 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.dagster]
+module_name = "motherduck_dagster_hybrid"
+
+[tool.ruff]
+
+line-length = 100
