@@ -7,9 +7,7 @@ from typing import List, Tuple
 import requests
 from dagster import (
     AssetExecutionContext,
-    Backoff,
     OpExecutionContext,
-    RetryPolicy,
     asset,
     file_relative_path,
 )
@@ -31,12 +29,6 @@ from .constants import (
     CHECKLIST_2021_2023,
 )
 from dagster import MaterializeResult
-
-retry_policy = RetryPolicy(
-    max_retries=3,
-    delay=0.2,  # 200ms
-    backoff=Backoff.EXPONENTIAL,
-)
 
 
 def download_and_extract_data(context: AssetExecutionContext, url: str) -> Tuple[List[str], float]:
@@ -94,7 +86,7 @@ def cornell_feederwatch_checklists_raw(context: AssetExecutionContext):
 
 
 @asset(compute_kind="python", group_name="raw")
-def site_description_data(context: AssetExecutionContext):
+def cornell_site_descriptions_raw(context: AssetExecutionContext):
     """Supplementary information about the count locations (sites)."""
     extracted_names, elapsed_times = download_and_extract_data(
         context, constants.SITE_DESCRIPTION_DATA
@@ -109,7 +101,7 @@ def site_description_data(context: AssetExecutionContext):
 
 
 @asset(compute_kind="python", group_name="raw")
-def species_translation_data(context: AssetExecutionContext):
+def cornell_species_translations_raw(context: AssetExecutionContext):
     """Species translation table stored in the Cornell Lab of Ornithology database."""
     extracted_names, elapsed_times = download_and_extract_data(
         context, constants.SPECIES_TRANSLATION_DATA
@@ -127,7 +119,6 @@ def species_translation_data(context: AssetExecutionContext):
     deps=[cornell_feederwatch_checklists_raw],
     group_name="prepared",
     compute_kind="duckdb",
-    retry_policy=retry_policy,
 )
 def birds(duckdb: DuckDBResource) -> MaterializeResult:
     """Union of all bird observations data."""
@@ -157,7 +148,7 @@ def birds(duckdb: DuckDBResource) -> MaterializeResult:
         metadata={
             "num_rows": nrows,
             "table_name": metadata["table_name"][0],
-            "datbase_name": metadata["database_name"][0],
+            "database_name": metadata["database_name"][0],
             "schema_name": metadata["schema_name"][0],
             "column_count": metadata["column_count"][0],
             "estimated_size": metadata["estimated_size"][0],
@@ -165,19 +156,24 @@ def birds(duckdb: DuckDBResource) -> MaterializeResult:
     )
 
 
+# Question for Alex:
+# Is it possible to `read_csv_auto` from a zip file to avoid the download to local for decompression
+# entirely?
+
+
 @asset(
-    deps=[species_translation_data],
+    deps=[cornell_species_translations_raw],
     compute_kind="duckdb",
     group_name="prepared",
-    retry_policy=retry_policy,
 )
-def species(duckdb: DuckDBResource):
-    species = file_relative_path(__file__, constants.SPECIES_TRANSLATION_FPATH)
+def species(context: AssetExecutionContext, duckdb: DuckDBResource):
+    species_csv_path = file_relative_path(__file__, constants.SPECIES_TRANSLATION_FPATH)
+    context.log.info("Loading species file: %s", species_csv_path)
     with duckdb.get_connection() as conn:
         conn.execute(
             f"""
             create or replace table species as (
-                select * from read_csv_auto('{species}')
+                select * from read_csv_auto('{species_csv_path}')
             )
             """
         )
@@ -190,7 +186,7 @@ def species(duckdb: DuckDBResource):
         metadata={
             "num_rows": nrows,
             "table_name": metadata["table_name"][0],
-            "datbase_name": metadata["database_name"][0],
+            "database_name": metadata["database_name"][0],
             "schema_name": metadata["schema_name"][0],
             "column_count": metadata["column_count"][0],
             "estimated_size": metadata["estimated_size"][0],
@@ -199,18 +195,18 @@ def species(duckdb: DuckDBResource):
 
 
 @asset(
-    deps=[site_description_data],
+    deps=[cornell_site_descriptions_raw],
     compute_kind="duckdb",
     group_name="prepared",
-    retry_policy=retry_policy,
 )
-def sites(duckdb: DuckDBResource):
-    sites = file_relative_path(__file__, constants.SITE_DATA_FPATH)
+def sites(context: AssetExecutionContext, duckdb: DuckDBResource):
+    sites_csv_path = file_relative_path(__file__, constants.SITE_DATA_FPATH)
+    context.log.info(sites_csv_path)
     with duckdb.get_connection() as conn:
         conn.execute(
             f"""
             create or replace table sites as (
-                select * from read_csv_auto('{sites}')
+                select * from read_csv_auto('{sites_csv_path}')
             )
             """
         )
@@ -223,7 +219,7 @@ def sites(duckdb: DuckDBResource):
         metadata={
             "num_rows": nrows,
             "table_name": metadata["table_name"][0],
-            "datbase_name": metadata["database_name"][0],
+            "database_name": metadata["database_name"][0],
             "schema_name": metadata["schema_name"][0],
             "column_count": metadata["column_count"][0],
             "estimated_size": metadata["estimated_size"][0],

@@ -13,5 +13,5 @@ setup(
         "polars",
         "pyarrow",
     ],
-    extras_require={"dev": ["dagster-webserver", "pytest"]},
+    extras_require={"dev": ["dagster-webserver", "pytest", "ruff"]},
 )
