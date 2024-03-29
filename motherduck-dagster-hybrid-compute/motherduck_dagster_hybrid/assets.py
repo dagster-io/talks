@@ -7,28 +7,23 @@ from typing import List, Tuple
 import requests
 from dagster import (
     AssetExecutionContext,
+    MaterializeResult,
     OpExecutionContext,
+    StaticPartitionsDefinition,
     asset,
     file_relative_path,
 )
 from dagster_dbt import DbtCliResource, dbt_assets
 from dagster_duckdb import DuckDBResource
-from dagster import (
-    StaticPartitionsDefinition,
-)
 
-from . import constants
-from .resources import CustomDagsterDbtTranslator, dbt_manifest_path
 from .constants import (
-    CHECKLIST_1988_1995,
-    CHECKLIST_1996_2000,
-    CHECKLIST_2001_2005,
-    CHECKLIST_2006_2010,
-    CHECKLIST_2011_2015,
-    CHECKLIST_2016_2020,
-    CHECKLIST_2021_2023,
+    CORNELL_BIRDWATCH_CHECKLISTS,
+    SITE_DATA_FPATH,
+    SITE_DESCRIPTION_DATA,
+    SPECIES_TRANSLATION_DATA,
+    SPECIES_TRANSLATION_FPATH,
 )
-from dagster import MaterializeResult
+from .resources import CustomDagsterDbtTranslator, dbt_manifest_path
 
 
 def download_and_extract_data(context: AssetExecutionContext, url: str) -> Tuple[List[str], float]:
@@ -53,17 +48,7 @@ def download_and_extract_data(context: AssetExecutionContext, url: str) -> Tuple
         return extracted_names, end_time - start_time
 
 
-CHECKLIST_URLS = [
-    CHECKLIST_1988_1995,
-    CHECKLIST_1996_2000,
-    CHECKLIST_2001_2005,
-    CHECKLIST_2006_2010,
-    CHECKLIST_2011_2015,
-    CHECKLIST_2016_2020,
-    CHECKLIST_2021_2023,
-]
-
-CHECKLIST_STATIC_PARTITIONS_DEF = StaticPartitionsDefinition(CHECKLIST_URLS)
+CHECKLIST_STATIC_PARTITIONS_DEF = StaticPartitionsDefinition(CORNELL_BIRDWATCH_CHECKLISTS)
 
 
 @asset(
@@ -88,9 +73,7 @@ def cornell_feederwatch_checklists_raw(context: AssetExecutionContext):
 @asset(compute_kind="python", group_name="raw")
 def cornell_site_descriptions_raw(context: AssetExecutionContext):
     """Supplementary information about the count locations (sites)."""
-    extracted_names, elapsed_times = download_and_extract_data(
-        context, constants.SITE_DESCRIPTION_DATA
-    )
+    extracted_names, elapsed_times = download_and_extract_data(context, SITE_DESCRIPTION_DATA)
     context.add_output_metadata(
         metadata={
             "names": extracted_names,
@@ -103,9 +86,7 @@ def cornell_site_descriptions_raw(context: AssetExecutionContext):
 @asset(compute_kind="python", group_name="raw")
 def cornell_species_translations_raw(context: AssetExecutionContext):
     """Species translation table stored in the Cornell Lab of Ornithology database."""
-    extracted_names, elapsed_times = download_and_extract_data(
-        context, constants.SPECIES_TRANSLATION_DATA
-    )
+    extracted_names, elapsed_times = download_and_extract_data(context, SPECIES_TRANSLATION_DATA)
     context.add_output_metadata(
         metadata={
             "names": extracted_names,
@@ -128,7 +109,7 @@ def birds(duckdb: DuckDBResource) -> MaterializeResult:
     # construct `union` statement of CSV files for load into `birds` table
     checklist_file_paths = [
         f"./data/raw/checklist_data/{os.path.splitext(os.path.basename(checklist_url))[0]}.csv"
-        for checklist_url in CHECKLIST_URLS
+        for checklist_url in CORNELL_BIRDWATCH_CHECKLISTS
     ]
 
     sql_csv_select_statements = [
@@ -167,7 +148,7 @@ def birds(duckdb: DuckDBResource) -> MaterializeResult:
     group_name="prepared",
 )
 def species(context: AssetExecutionContext, duckdb: DuckDBResource):
-    species_csv_path = file_relative_path(__file__, constants.SPECIES_TRANSLATION_FPATH)
+    species_csv_path = file_relative_path(__file__, SPECIES_TRANSLATION_FPATH)
     context.log.info("Loading species file: %s", species_csv_path)
     with duckdb.get_connection() as conn:
         conn.execute(
@@ -200,7 +181,7 @@ def species(context: AssetExecutionContext, duckdb: DuckDBResource):
     group_name="prepared",
 )
 def sites(context: AssetExecutionContext, duckdb: DuckDBResource):
-    sites_csv_path = file_relative_path(__file__, constants.SITE_DATA_FPATH)
+    sites_csv_path = file_relative_path(__file__, SITE_DATA_FPATH)
     context.log.info(sites_csv_path)
     with duckdb.get_connection() as conn:
         conn.execute(

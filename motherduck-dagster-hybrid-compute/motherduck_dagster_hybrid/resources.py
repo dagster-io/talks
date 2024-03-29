@@ -1,5 +1,4 @@
-from dagster import file_relative_path, get_dagster_logger
-from dagster import AssetKey, EnvVar
+from dagster import AssetKey, EnvVar, file_relative_path, get_dagster_logger
 from dagster_dbt import DagsterDbtTranslator, DbtCliResource
 from dagster_duckdb import DuckDBResource
 
@@ -10,9 +9,7 @@ duckdb_resource = DuckDBResource(
 logger = get_dagster_logger()
 
 
-dbt_resource = DbtCliResource(
-    project_dir=file_relative_path(__file__, "../dbt_project")
-)
+dbt_resource = DbtCliResource(project_dir=file_relative_path(__file__, "../dbt_project"))
 dbt_parse_invocation = dbt_resource.cli(["parse"], manifest={}).wait()
 dbt_manifest_path = dbt_parse_invocation.target_path.joinpath("manifest.json")
 

@@ -17,3 +17,7 @@ evidence-install:
 
 evidence-run:
 	cd dbt_project && npm --prefix ./reports run dev -- --port 4000
+
+ruff:
+	ruff check --select I --fix .
+	ruff format .

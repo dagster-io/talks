@@ -1,7 +1,7 @@
 from dagster import (
     Definitions,
-    load_assets_from_modules,
     define_asset_job,
+    load_assets_from_modules,
 )
 
 from . import assets, resources
