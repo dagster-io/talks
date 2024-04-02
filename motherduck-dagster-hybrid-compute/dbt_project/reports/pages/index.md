@@ -1,135 +1,61 @@
-# Open-Source Modern Data Stack
+# The Duck Details
 
-This is the visualization output from the Open-Source MDS Pipeline.
+## Source
 
-![Asset Graph](/asset_graph.png)
+Project FeederWatch turns your love of feeding birds into scientific discoveries. FeederWatch is a November-April survey of birds that visit backyards, nature centers, community areas, and other locales in North America. Count your birds for as long as you like on days of your choosing, then enter your counts online. Your counts allow you to track what is happening to birds around your home and to contribute to a continental data-set of bird distribution and abundance.
 
-See the [About](/about) page for more information about the project.
+- [feederwatch.org/explore/raw-dataset-requests](https://feederwatch.org/explore/raw-dataset-requests/)
 
-## Bird Data
+> Note that raw data files are large (> 1.8 million checklists) and require proficiency in statistical software (e.g. SAS or R) or advanced database tools (e.g. MySQL, Microsoft Access). Project FeederWatch does not have the staff available to assist with these tools or to create custom subsets of the raw data.
 
-```sql all_birds
-select *
-from all_birds
-limit 600
+
+```sql top_ducks_annually
+select
+  year,
+  bird_name,
+  country,
+  region,
+  species_count
+from motherduck.top_ducks_annually
+where
+  lower(bird_name) like '%duck%'
+order by
+  year desc,
+  species_count desc
 ```
 
-<DataTable data="{all_birds}" search="true" />
+<DataTable data="{top_ducks_annually}" search="true" />
 
-```sql count_birds
+```sql duck_counts
 select
-date_trunc('year', obs_date) as obs_year,
-count(distinct checklist_id) as n_checklists,
-count(distinct observation_id) as n_observations,
-sum(species_count) as total_species
-
-from all_birds
+    date_trunc('year', obs_date) as obs_year,
+    count(distinct checklist_id) as n_checklists,
+    count(distinct observation_id) as n_observations,
+    sum(species_count) as total_species
+from motherduck.all_ducks
+where
+  lower(bird_name) like '%duck%'
 group by all
 order by 1 desc
 ```
-## Annual Summary Metrics
 
 <BigValue
-    data={count_birds}
+    data={duck_counts}
     value='n_checklists'
-    title='# Checklists'
+    title='Num Checklists'
     sparkline='obs_year'
-    maxWidth='14em'
 />
 
-
 <BigValue
-    data={count_birds}
+    data={duck_counts}
     value='n_observations'
-    title='# Observations'
+    title='Num Observations'
     sparkline='obs_year'
-    maxWidth='14em'
 />
-
 
 <BigValue
-    data={count_birds}
+    data={duck_counts}
     value='total_species'
-    title='# Total Species'
+    title='Num Species'
     sparkline='obs_year'
-    maxWidth='14em'
 />
-
-## California Quail
-
-![California Quail](https://cdn.download.ams.birds.cornell.edu/api/v1/asset/562190741/900)
-
-```sql quail
-select
-date_trunc('month', obs_date) as obs_month,
-region,
-sum(species_count) as species_count
-from all_birds
-where bird_name = 'California Quail'
-group by all
-```
-
-<LineChart
-    data={quail}
-    x='obs_month'
-    y='species_count'
-    series='region'
-/>
-
-
-
-## Some Regional Birds
-
-```sql top_states
-select
-country,
-region,
-sum(species_count) as total_count
-from all_birds
-
-group by all
-order by 3 desc
-limit 10
-```
-
-<BarChart
-    data={top_states}
-    swapXY=true
-    x=country
-    y=total_count
-    series=region
-    xType=category
-    sort=false
-/>
-
-```sql regional_birds
-select
-country,
-region,
-bird_name,
-total_count from (
-    select
-
-    country,
-    region,
-    bird_name,
-    sum(species_count) as total_count,
-    row_number() over (partition by region order by sum(species_count) desc) as rank
-
-    from all_birds
-    where region in ('CA', 'ON', 'NY', 'PA', 'VA')
-    group by 1,2,3
-) where rank <= 5
-
-```
-<BarChart
-    data={regional_birds}
-    swapXY=true
-    x=region
-    y=total_count
-    series=bird_name
-    xType=category
-    sort=false
-/>
-
-

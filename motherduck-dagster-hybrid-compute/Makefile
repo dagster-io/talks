@@ -12,11 +12,13 @@ dev:
 	dagster dev
 
 evidence-install:
-	cd dbt_project && npm --prefix ./reports install
-	cd ..
+	npm --prefix ./dbt_project/reports install
 
-evidence-run:
-	cd dbt_project && npm --prefix ./reports run dev -- --port 4000
+evidence-source:
+	npm --prefix ./dbt_project/reports run source
+
+evidence:
+	npm --prefix ./dbt_project/reports run dev -- --port 4000
 
 ruff:
 	ruff check --select I --fix .
