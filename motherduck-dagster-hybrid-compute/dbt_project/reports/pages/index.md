@@ -19,8 +19,7 @@ Project FeederWatch turns your love of feeding birds into scientific discoveries
 
 ![Dagster Asset Lineage](/asset-graph.png)
 
-## Visualizations
-
+## Metrics
 
 ```sql top_ducks_annually
 select
@@ -32,7 +31,7 @@ select
     region,
     species_count
 
-from motherduck.top_ducks_by_year
+from dagster_hybrid_demo.top_ducks_by_year
 order by
   year desc,
   species_count desc
@@ -55,7 +54,7 @@ select
     count(distinct observation_id) as n_observations,
     sum(species_count) as total_species
 
-from motherduck.all_ducks
+from dagster_hybrid_demo.all_ducks
 group by all
 order by 1 desc
 ```
@@ -87,7 +86,7 @@ order by 1 desc
 ---
 
 
-## Duck Observations
+### Duck Observations
 
 <BarChart 
     data={duck_counts} 
@@ -96,7 +95,7 @@ order by 1 desc
 />
 
 
-## Regional Metrics
+### Regional Metrics
 
 By far, the most duck observations occur in [Florida](https://en.wikipedia.org/wiki/Florida), either these people have a lot of ducks or enough time on their hands to report them to Feeder Watch.
 
@@ -108,7 +107,7 @@ select
     state,
     total_species_count
 
-from motherduck.top_ducks_by_state
+from dagster_hybrid_demo.top_ducks_by_state
 
 where obs_year = 2023
 ```
@@ -122,14 +121,14 @@ where obs_year = 2023
     colorScale=red
 />
 
-## Most Uncommon Species
+### Most Uncommon Species
 
 ```sql most_rare_species
 
 select
   bird_name,
   sum(species_count) as count
-from motherduck.top_ducks_by_year
+from dagster_hybrid_demo.top_ducks_by_year
 where
   lower(bird_name) not like '%sp.%'
   and lower(bird_name) not like '%hybrid%'

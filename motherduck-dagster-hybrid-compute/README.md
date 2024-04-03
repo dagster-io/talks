@@ -12,34 +12,36 @@ This stack is built on a combination of tools including:
 
 ## Requirements
 
-You will need Python installed. This was all tested on Python 3.10.12
+### Dagster
+
 From a virtual environment, run
 
-```python
+```bash
 make install
 ```
-Most of the dependencies will be installed through Python.
-
 For Evidence.dev, you will need [nodejs](https://nodejs.org/en/download) installed
 
-To run Dagster locally, issue the following command:
 
-```shell
+Runing Dagster:
+
+```bash
 make dev
 ```
 
 Navigate to http://localhost:3000/, and click Materialize all to run the end-to-end pipeline.
 
-## Visualization
+### Evidence
 
-Evidence.dev is used for visualization.
+Install the required Node packages in the:
 
-First, go the `dbt_project` folder
-
-```
-cd dbt_project
-
-npm --prefix ./reports install
-npm --prefix ./reports run dev -- --port 4000
+```bash
+make evidence-install
 ```
 
+Run the Evidence development server:"
+
+```bash
+make evidence
+```
+
+Navigate to http://localhost:4000/ to view the report.
