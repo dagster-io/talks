@@ -17,6 +17,12 @@ evidence-install:
 evidence-source:
 	npm --prefix ./dbt_project/reports run source
 
+evidence-build:
+	npm --prefix ./dbt_project/reports run build
+
+evidence-preview:
+	npm --prefix ./dbt_project/reports run preview -- --port 4000
+
 evidence:
 	npm --prefix ./dbt_project/reports run dev -- --port 4000
 

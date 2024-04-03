@@ -5,6 +5,7 @@ from tempfile import NamedTemporaryFile
 from typing import List, Tuple
 
 import requests
+import subprocess
 from dagster import (
     AssetExecutionContext,
     MaterializeResult,
@@ -232,3 +233,16 @@ def sites(context: AssetExecutionContext, duckdb: DuckDBResource):
 @dbt_assets(manifest=dbt_manifest_path, dagster_dbt_translator=CustomDagsterDbtTranslator())
 def dbt_birds(context: OpExecutionContext, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()
+
+
+@asset(
+    compute_kind="evidence",
+    group_name="reporting",
+    deps=[dbt_birds]
+)
+def evidence_dashboard():
+    """Dashboard built using Evidence showing Duck metrics.
+    """
+    evidence_project_path = file_relative_path(__file__, "../dbt_project/reports")
+    subprocess.run(["npm", "--prefix", evidence_project_path, "install"])
+    subprocess.run(["npm", "--prefix", evidence_project_path, "run", "build"])
