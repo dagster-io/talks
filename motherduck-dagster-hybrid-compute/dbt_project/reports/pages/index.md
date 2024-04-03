@@ -23,35 +23,20 @@ Project FeederWatch turns your love of feeding birds into scientific discoveries
 
 ### Duck Observations
 
-<BigValue
-    data={duck_counts}
-    value='n_checklists'
-    title='Num Checklists'
-    sparkline='obs_year'
-    width=250
+
+There were <strong><Value data={duck_counts} value='n_checklists' /></strong> checklists, <strong><Value data={duck_counts} value='n_observations' /></strong> observations, and <strong><Value data={duck_counts} value='total_species' /></strong> total species of Ducks.
+
+Most observations occur on Saturdays -- the FeederWatch dataset is seasonal, operating from November to April of each year.
+
+<CalendarHeatmap 
+    data={duck_counts_recent} 
+    date=obs_date 
+    value=n_observations 
+    title="Calendar Heatmap"
+    subtitle="Daily Sales"
 />
 
-<BigValue
-    data={duck_counts}
-    value='n_observations'
-    title='Num Observations'
-    sparkline='obs_year'
-    width=250
-/>
-
-<BigValue
-    data={duck_counts}
-    value='total_species'
-    title='Num Species'
-    sparkline='obs_year'
-    width=250
-/>
-
-<BarChart 
-    data={duck_counts} 
-    x=obs_year
-    y=n_observations 
-/>
+### Regional Metrics
 
 <DataTable data="{top_ducks_annually}" search="true" rows="10" >
   <Column id="country_flag" contentType=image height=30px />
@@ -64,7 +49,7 @@ Project FeederWatch turns your love of feeding birds into scientific discoveries
 </DataTable>
 
 
-### Regional Metrics
+#### U.S. State Heatmap
 
 By far, the most duck observations occur in [Florida](https://en.wikipedia.org/wiki/Florida), either these people have a lot of ducks or enough time on their hands to report them to Feeder Watch.
 
@@ -78,7 +63,9 @@ By far, the most duck observations occur in [Florida](https://en.wikipedia.org/w
     max=500
 />
 
-### Most Uncommon Species
+### Rarity
+
+#### Most Uncommon Species
 
 The most uncommon Duck observations excluding hybrids breeds include:
 
@@ -124,12 +111,28 @@ order by
 ```sql duck_counts
 select
 
+    obs_date,
     date_trunc('year', obs_date) as obs_year,
     count(distinct checklist_id) as n_checklists,
     count(distinct observation_id) as n_observations,
     sum(species_count) as total_species
 
 from dagster_hybrid_demo.all_ducks
+group by all
+order by 1 desc
+```
+
+```sql duck_counts_recent
+select
+
+    obs_date,
+    date_trunc('year', obs_date) as obs_year,
+    count(distinct checklist_id) as n_checklists,
+    count(distinct observation_id) as n_observations,
+    sum(species_count) as total_species
+
+from dagster_hybrid_demo.all_ducks
+where obs_date > '2020-01-01'
 group by all
 order by 1 desc
 ```
