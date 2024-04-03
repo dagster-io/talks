@@ -32,16 +32,10 @@ Navigate to http://localhost:3000/, and click Materialize all to run the end-to-
 
 ### Evidence
 
-Install the required Node packages in the:
+The pipeline will generate the Evidence dashboard HTML files. To preview the dashboard you can use the following directive:
 
 ```bash
-make evidence-install
-```
-
-Run the Evidence development server:"
-
-```bash
-make evidence
+make evidence-preview
 ```
 
 Navigate to http://localhost:4000/ to view the report.
