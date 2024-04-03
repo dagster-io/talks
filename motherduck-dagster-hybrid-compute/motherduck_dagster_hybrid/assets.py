@@ -56,12 +56,20 @@ CHECKLIST_STATIC_PARTITIONS_DEF = StaticPartitionsDefinition(CORNELL_BIRDWATCH_C
     compute_kind="python",
     group_name="raw",
 )
-def cornell_feederwatch_checklists_raw(context: AssetExecutionContext):
+def cornell_feederwatch_checklists_raw(context: AssetExecutionContext) -> MaterializeResult:
     """The Cornell Lab of Ornithology and Birds Canada bird observations."""
     checklist = context.partition_key
 
+    # skip if the file is already present on the file system
+    destination_file_basename = os.path.splitext(os.path.basename(checklist))[0]
+    destination_file = f"./data/raw/checklist_data/{destination_file_basename}.csv"
+
+    if os.path.exists(destination_file):
+        context.log.info("Skipping download of %s as file already exists", checklist)
+        return MaterializeResult()
+
     extracted_names, elapsed_times = download_and_extract_data(context, checklist)
-    context.add_output_metadata(
+    return MaterializeResult(
         metadata={
             "names": extracted_names,
             "num_files": len(extracted_names),
@@ -101,10 +109,13 @@ def cornell_species_translations_raw(context: AssetExecutionContext):
     group_name="prepared",
     compute_kind="duckdb",
 )
-def birds(duckdb: DuckDBResource) -> MaterializeResult:
+def birds(context: AssetExecutionContext, duckdb: DuckDBResource) -> MaterializeResult:
     """Union of all bird observations data."""
 
-    # TODO - see if files can be loaded into Motherduck directly without pulling to local filesystem
+    # We are extracting the ZIP files and loading them with `read_csv_auto` as DuckDB does not
+    # currently support decompressing ZIP files directly. If this were the case, we might be able to
+    # point directly to the hosted ZIP files on Cornell's website and drastically simplify this
+    # pipeline.
 
     # construct `union` statement of CSV files for load into `birds` table
     checklist_file_paths = [
@@ -119,10 +130,20 @@ def birds(duckdb: DuckDBResource) -> MaterializeResult:
     sql_csv_union_query = " UNION ALL ".join(sql_csv_select_statements)
 
     with duckdb.get_connection() as conn:
-        conn.execute(f"create or replace table birds as ({sql_csv_union_query})")
+        # If the `birds` table already exists, and has a decent chunk of rows, we will skip
+        # re-loading the CSV files. This is primarily to expedite the demo process, in production
+        # you may want to consider alternatives.
+
+        metadata = conn.execute("select * from duckdb_tables() where table_name = 'birds'").pl()
+        if len(metadata["table_name"]) >= 1:
+            nrows = conn.execute("select count(*) from birds").fetchone()[0]  # type: ignore
+            if nrows > 40_000_000:
+                context.log.info("Table has already been loaded; skipping...")
+                return MaterializeResult(metadata={"num_rows": nrows})
 
         nrows = conn.execute("select count(*) from birds").fetchone()[0]  # type: ignore
-
+        conn.execute(f"create or replace table birds as ({sql_csv_union_query})")
+        nrows = conn.execute("select count(*) from birds").fetchone()[0]  # type: ignore
         metadata = conn.execute("select * from duckdb_tables() where table_name = 'birds'").pl()
 
     return MaterializeResult(
