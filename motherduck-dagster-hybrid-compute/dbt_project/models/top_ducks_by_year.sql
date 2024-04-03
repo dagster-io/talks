@@ -7,5 +7,6 @@ select
     sum(species_count) as species_count
 
 from {{ ref('all_birds') }}
+where lower(bird_name) like '%duck%'
 group by all
 order by year, species_count desc
