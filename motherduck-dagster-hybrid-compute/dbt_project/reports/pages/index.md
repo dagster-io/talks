@@ -21,43 +21,7 @@ Project FeederWatch turns your love of feeding birds into scientific discoveries
 
 ## Metrics
 
-```sql top_ducks_annually
-select
-
-    concat('/flags/', country, '.png') as flag,
-    year,
-    bird_name,
-    country,
-    region,
-    species_count
-
-from dagster_hybrid_demo.top_ducks_by_year
-order by
-  year desc,
-  species_count desc
-```
-
-<DataTable data="{top_ducks_annually}" search="true" rows="10" >
-  <Column id="flag" contentType=image height=30px align=center />
-  <Column id="year" align="left" />
-  <Column id="bird_name" align="left" />
-  <Column id="region" align="right" />
-  <Column id="species_count" align="right" contentType="colorscale" scaleColor="green"/>
-
-</DataTable>
-
-```sql duck_counts
-select
-
-    date_trunc('year', obs_date) as obs_year,
-    count(distinct checklist_id) as n_checklists,
-    count(distinct observation_id) as n_observations,
-    sum(species_count) as total_species
-
-from dagster_hybrid_demo.all_ducks
-group by all
-order by 1 desc
-```
+### Duck Observations
 
 <BigValue
     data={duck_counts}
@@ -83,34 +47,26 @@ order by 1 desc
     width=250
 />
 
----
-
-
-### Duck Observations
-
 <BarChart 
     data={duck_counts} 
     x=obs_year
     y=n_observations 
 />
 
+<DataTable data="{top_ducks_annually}" search="true" rows="10" >
+  <Column id="country_flag" contentType=image height=30px />
+  <Column id="region_flag" contentType=image height=30px />
+  <Column id="country" align=left />
+  <Column id="region" align=left />
+  <Column id="year" align=left />
+  <Column id="bird_name" align=left />
+  <Column id="species_count" align=right contentType=colorscale scaleColor=green />
+</DataTable>
+
 
 ### Regional Metrics
 
 By far, the most duck observations occur in [Florida](https://en.wikipedia.org/wiki/Florida), either these people have a lot of ducks or enough time on their hands to report them to Feeder Watch.
-
-
-```sql ducks_by_state
-
-select
-
-    state,
-    total_species_count
-
-from dagster_hybrid_demo.top_ducks_by_state
-
-where obs_year = 2023
-```
 
 <USMap
     data={ducks_by_state}
@@ -119,23 +75,10 @@ where obs_year = 2023
     legend=true
     abbreviations=true
     colorScale=red
+    max=500
 />
 
 ### Most Uncommon Species
-
-```sql most_rare_species
-
-select
-  bird_name,
-  sum(species_count) as count
-from dagster_hybrid_demo.top_ducks_by_year
-where
-  lower(bird_name) not like '%sp.%'
-  and lower(bird_name) not like '%hybrid%'
-group by bird_name
-having count < 25
-
-```
 
 The most uncommon Duck observations excluding hybrids breeds include:
 
@@ -156,3 +99,63 @@ The most uncommon Duck observations excluding hybrids breeds include:
 > The Muscovy duck (Cairina moschata) is a duck native to the Americas, from the Rio Grande Valley of Texas and Mexico south to Argentina and Uruguay. Feral Muscovy ducks are found in New Zealand, Australia, and in Central and Eastern Europe. Small wild and feral breeding populations have also established themselves in the United States, particularly in Florida, Louisiana, Massachusetts, the Big Island of Hawaii, as well as in many other parts of North America, including southern Canada. [[more info]](https://en.wikipedia.org/wiki/Muscovy_duck)
 
 ![Muscovy Duck](/ducks/muscovy-duck.jpg)
+
+---
+
+```sql top_ducks_annually
+select
+
+    -- original structure was going to be /flags/<country>/<region>.png, but this was causing issues :shrug:
+    concat('/country-flag/', lower(country), '.png') as country_flag,
+    concat('/region-flag/', lower(region), '.png') as region_flag,
+    year,
+    bird_name,
+    country,
+    region,
+    species_count
+
+from dagster_hybrid_demo.top_ducks_by_year
+order by
+  year desc,
+  species_count desc
+```
+
+
+```sql duck_counts
+select
+
+    date_trunc('year', obs_date) as obs_year,
+    count(distinct checklist_id) as n_checklists,
+    count(distinct observation_id) as n_observations,
+    sum(species_count) as total_species
+
+from dagster_hybrid_demo.all_ducks
+group by all
+order by 1 desc
+```
+
+```sql ducks_by_state
+
+select
+
+    state,
+    total_species_count
+
+from dagster_hybrid_demo.top_ducks_by_state
+
+where obs_year = 2023
+```
+
+```sql most_rare_species
+
+select
+  bird_name,
+  sum(species_count) as count
+from dagster_hybrid_demo.top_ducks_by_year
+where
+  lower(bird_name) not like '%sp.%'
+  and lower(bird_name) not like '%hybrid%'
+group by bird_name
+having count < 25
+
+```
