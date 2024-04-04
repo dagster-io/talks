@@ -33,7 +33,7 @@ Most observations occur on Saturdays -- the FeederWatch dataset is seasonal, ope
     date=obs_date 
     value=n_observations 
     title="Calendar Heatmap"
-    subtitle="Daily Sales"
+    subtitle="Daily Observations"
 />
 
 ### Regional Metrics

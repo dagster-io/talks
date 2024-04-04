@@ -3,4 +3,7 @@ motherduck-dagster-hybrid:
   outputs:
     dev:
       type: duckdb
-      path: '{{ env_var("DUCKDB_DATABASE", "../data/db/osmds.db") }}'
+      path: '{{ env_var("DUCKDB_DATABASE") }}'
+    prod:
+      type: duckdb
+      path: '{{ env_var("DUCKDB_DATABASE") }}'

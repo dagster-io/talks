@@ -159,11 +159,6 @@ def birds(context: AssetExecutionContext, duckdb: DuckDBResource) -> Materialize
     )
 
 
-# Question for Alex:
-# Is it possible to `read_csv_auto` from a zip file to avoid the download to local for decompression
-# entirely?
-
-
 @asset(
     deps=[cornell_species_translations_raw],
     compute_kind="duckdb",
@@ -173,21 +168,23 @@ def species(context: AssetExecutionContext, duckdb: DuckDBResource):
     species_csv_path = file_relative_path(__file__, SPECIES_TRANSLATION_FPATH)
     context.log.info("Loading species file: %s", species_csv_path)
     with duckdb.get_connection() as conn:
-        conn.execute(
-            f"""
+        conn.execute(f"""
             create or replace table species as (
                 select * from read_csv_auto('{species_csv_path}')
             )
-            """
-        )
+        """)
 
-        nrows = conn.execute("select count(*) from species").fetchone()[0]  # type: ignore
+        nrows = conn.execute("""
+            select count(*) from species
+        """).fetchone()
 
-        metadata = conn.execute("select * from duckdb_tables() where table_name = 'species'").pl()
+        metadata = conn.execute("""
+            select * from duckdb_tables() where table_name = 'species'
+        """).pl()
 
     return MaterializeResult(
         metadata={
-            "num_rows": nrows,
+            "num_rows": nrows[0] if nrows else 0,
             "table_name": metadata["table_name"][0],
             "database_name": metadata["database_name"][0],
             "schema_name": metadata["schema_name"][0],
@@ -235,14 +232,10 @@ def dbt_birds(context: OpExecutionContext, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()
 
 
-@asset(
-    compute_kind="evidence",
-    group_name="reporting",
-    deps=[dbt_birds]
-)
+@asset(compute_kind="evidence", group_name="reporting", deps=[dbt_birds])
 def evidence_dashboard():
-    """Dashboard built using Evidence showing Duck metrics.
-    """
+    """Dashboard built using Evidence showing Duck metrics."""
     evidence_project_path = file_relative_path(__file__, "../dbt_project/reports")
     subprocess.run(["npm", "--prefix", evidence_project_path, "install"])
+    subprocess.run(["npm", "--prefix", evidence_project_path, "run", "sources"])
     subprocess.run(["npm", "--prefix", evidence_project_path, "run", "build"])
