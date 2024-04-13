@@ -1,11 +1,17 @@
-# The Duck Details
+# The Duck Details with Dagster, MotherDuck, and Evidence
 
+
+- Orchestration with [Dagster](https://dagster.io/)
+- [MotherDuck](https://motherduck.com/) as the data warehouse
+- And [Evidence](https://evidence.dev/) for visualizations
 
 <div style="display: flex; justify-content: center;">
-  <img src="/logos/dagster.svg" style="flex: 1; max-width: 72px;">
-  <img src="/logos/motherduck.svg" style="flex: 1; max-width: 72px;">
+  <img src="/logos/dagster.svg" style="flex: 1; max-width: 52px; margin-right: 10px;">
+  <img src="/logos/motherduck.svg" style="flex: 1; max-width: 52px; margin-right: 10px;">
+  <img src="/logos/evidence.svg" style="flex: 1; max-width: 42px;">
 </div>
 
+---
 
 ## Project Feederwatch
 
@@ -18,147 +24,3 @@ Project FeederWatch turns your love of feeding birds into scientific discoveries
 ## Dagster Asset Lineage
 
 ![Dagster Asset Lineage](/asset-graph.png)
-
-## Metrics
-
-### Duck Observations
-
-
-There were <strong><Value data={duck_counts} value='n_checklists' /></strong> checklists, <strong><Value data={duck_counts} value='n_observations' /></strong> observations, and <strong><Value data={duck_counts} value='total_species' /></strong> total species of Ducks.
-
-Most observations occur on Saturdays -- the FeederWatch dataset is seasonal, operating from November to April of each year.
-
-<CalendarHeatmap 
-    data={duck_counts_recent} 
-    date=obs_date 
-    value=n_observations 
-    title="Calendar Heatmap"
-    subtitle="Daily Observations"
-/>
-
-### Regional Metrics
-
-<DataTable data="{top_ducks_annually}" search="true" rows="10" >
-  <Column id="country_flag" contentType=image height=30px />
-  <Column id="region_flag" contentType=image height=30px />
-  <Column id="country" align=left />
-  <Column id="region" align=left />
-  <Column id="year" align=left />
-  <Column id="bird_name" align=left />
-  <Column id="species_count" align=right contentType=colorscale scaleColor=green />
-</DataTable>
-
-
-#### U.S. State Heatmap
-
-By far, the most duck observations occur in [Florida](https://en.wikipedia.org/wiki/Florida), either these people have a lot of ducks or enough time on their hands to report them to Feeder Watch.
-
-<USMap
-    data={ducks_by_state}
-    state=state
-    value=total_species_count
-    legend=true
-    abbreviations=true
-    colorScale=red
-    max=500
-/>
-
-### Rarity
-
-#### Most Uncommon Species
-
-The most uncommon Duck observations excluding hybrids breeds include:
-
- 1. The <strong>Long Tailed Duck</strong>
-
-> The long-tailed duck (Clangula hyemalis) or coween,[2] formerly known as the oldsquaw, is a medium-sized sea duck that breeds in the tundra and taiga regions of the arctic and winters along the northern coastlines of the Atlantic and Pacific Oceans. It is the only member of the genus Clangula. [[more info]](https://en.wikipedia.org/wiki/Long-tailed_duck)
-
-![Long Tailed Duck](/ducks/long-tailed-duck.jpg)
-
- 2. The <strong>Mandarin Duck</strong> 
-
-> The mandarin duck (Aix galericulata) is a perching duck species native to the East Palearctic. It is sexually dimorphic, males showing a dramatic difference from the females.[3] It is medium-sized, at 41–49 cm (16–19 in) long with a 65–75 cm (26–30 in) wingspan. It is closely related to the North American wood duck, the only other member of the genus Aix. 'Aix' is an Ancient Greek word which was used by Aristotle to refer to an unknown diving bird, and 'galericulata' is the Latin for a wig, derived from galerum, a cap or bonnet.[4] Outside of its native range, the mandarin duck has a large introduced population in the British Isles and Western Europe, with additional smaller introductions in North America. [[more info]](https://en.wikipedia.org/wiki/Mandarin_duck)
-
-![Mandarin Duck](/ducks/mandarin-duck.jpg)
-
- 3. The <strong>Muscovy Duck</strong> 
-
-> The Muscovy duck (Cairina moschata) is a duck native to the Americas, from the Rio Grande Valley of Texas and Mexico south to Argentina and Uruguay. Feral Muscovy ducks are found in New Zealand, Australia, and in Central and Eastern Europe. Small wild and feral breeding populations have also established themselves in the United States, particularly in Florida, Louisiana, Massachusetts, the Big Island of Hawaii, as well as in many other parts of North America, including southern Canada. [[more info]](https://en.wikipedia.org/wiki/Muscovy_duck)
-
-![Muscovy Duck](/ducks/muscovy-duck.jpg)
-
----
-
-```sql top_ducks_annually
-select
-
-    -- original structure was going to be /flags/<country>/<region>.png, but this was causing issues :shrug:
-    concat('/country-flag/', lower(country), '.png') as country_flag,
-    concat('/region-flag/', lower(region), '.png') as region_flag,
-    year,
-    bird_name,
-    country,
-    region,
-    species_count
-
-from dagster_hybrid_demo.top_ducks_by_year
-order by
-  year desc,
-  species_count desc
-```
-
-
-```sql duck_counts
-select
-
-    obs_date,
-    date_trunc('year', obs_date) as obs_year,
-    count(distinct checklist_id) as n_checklists,
-    count(distinct observation_id) as n_observations,
-    sum(species_count) as total_species
-
-from dagster_hybrid_demo.all_ducks
-group by all
-order by 1 desc
-```
-
-```sql duck_counts_recent
-select
-
-    obs_date,
-    date_trunc('year', obs_date) as obs_year,
-    count(distinct checklist_id) as n_checklists,
-    count(distinct observation_id) as n_observations,
-    sum(species_count) as total_species
-
-from dagster_hybrid_demo.all_ducks
-where obs_date > '2020-01-01'
-group by all
-order by 1 desc
-```
-
-```sql ducks_by_state
-
-select
-
-    state,
-    total_species_count
-
-from dagster_hybrid_demo.top_ducks_by_state
-
-where obs_year = 2023
-```
-
-```sql most_rare_species
-
-select
-  bird_name,
-  sum(species_count) as count
-from dagster_hybrid_demo.top_ducks_by_year
-where
-  lower(bird_name) not like '%sp.%'
-  and lower(bird_name) not like '%hybrid%'
-group by bird_name
-having count < 25
-
-```
