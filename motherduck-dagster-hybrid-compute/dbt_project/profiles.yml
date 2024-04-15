@@ -1,0 +1,9 @@
+motherduck-dagster-hybrid:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '{{ env_var("DUCKDB_DATABASE") }}'
+    prod:
+      type: duckdb
+      path: '{{ env_var("DUCKDB_DATABASE") }}'
