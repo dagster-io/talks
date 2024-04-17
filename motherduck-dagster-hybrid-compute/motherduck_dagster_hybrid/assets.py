@@ -235,7 +235,7 @@ def dbt_birds(context: OpExecutionContext, dbt: DbtCliResource):
 @asset(compute_kind="evidence", group_name="reporting", deps=[dbt_birds])
 def evidence_dashboard():
     """Dashboard built using Evidence showing Duck metrics."""
-    evidence_project_path = file_relative_path(__file__, "../dbt_project/reports")
+    evidence_project_path = file_relative_path(__file__, "../reports")
     subprocess.run(["npm", "--prefix", evidence_project_path, "install"])
     subprocess.run(["npm", "--prefix", evidence_project_path, "run", "sources"])
     subprocess.run(["npm", "--prefix", evidence_project_path, "run", "build"])
