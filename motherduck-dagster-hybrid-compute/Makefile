@@ -15,19 +15,19 @@ dev:  ## Run Dagster development environment
 	dagster dev
 
 evidence-install:  ## Install Evidence dependencies
-	npm --prefix ./dbt_project/reports install
+	npm --prefix ./reports install
 
 evidence-source:  ## Pull Evidence source data
-	npm --prefix ./dbt_project/reports run source
+	npm --prefix ./reports run source
 
 evidence-build:  ## Build Evidence reports
-	npm --prefix ./dbt_project/reports run build
+	npm --prefix ./reports run build
 
 evidence-preview:  ## Preview built evidence reports on port 4000
-	npm --prefix ./dbt_project/reports run preview -- --port 4000
+	npm --prefix ./reports run preview -- --port 4000
 
 evidence:  ## Run Evidence development environment on port 4000
-	npm --prefix ./dbt_project/reports run dev -- --port 4000
+	npm --prefix ./reports run dev -- --port 4000
 
 ruff:  ## Format Python code with `ruff`
 	ruff check --select I --fix .

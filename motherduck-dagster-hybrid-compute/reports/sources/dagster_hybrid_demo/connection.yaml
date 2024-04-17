@@ -1,0 +1,5 @@
+# This file was automatically generated
+name: dagster_hybrid_demo
+type: duckdb
+options:
+  filename: md:?motherduck_token=<replace>
