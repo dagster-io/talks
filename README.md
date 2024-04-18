@@ -26,20 +26,20 @@ to us on [Slack](https://dagster.io/slack), or through a GitHub Issue / Discussi
 [4]: https://github.com/dagster-io/data-mesh-demo
 [5]: https://github.com/dagster-io/devrel-project-demos/tree/main/motherduck-dagster-hybrid-compute
 
-## Slide Decks
+## Slides
 
-<div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-gap: 10px;">
+<div>
    <a href="https://github.com/dagster-io/devrel-project-demos/blob/main/slides/motherduck-dagster-evidence-hybrid-compute.pdf">
-   <img src="slides/motherduck-dagster-evidence-hybrid-compute.jpg">
+       <img height="140" src="slides/motherduck-dagster-evidence-hybrid-compute.jpg" />
    </a>
    <a href="https://github.com/dagster-io/devrel-project-demos/blob/main/slides/03-deep-dive-partitions.pdf">
-   <img src="slides/03-deep-dive-partitions.jpg">
+       <img height="140" src="slides/03-deep-dive-partitions.jpg" />
    </a>
    <a href="https://github.com/dagster-io/devrel-project-demos/blob/main/slides/02-deep-dive-resources.pdf">
-   <img src="slides/02-deep-dive-resources.jpg">
+       <img height="140" src="slides/02-deep-dive-resources.jpg" />
    </a>
    <a href="https://github.com/dagster-io/devrel-project-demos/blob/main/slides/01-deep-dive-wautomation.pdf">
-   <img src="slides/01-deep-dive-automation.jpg">
+       <img height="140" src="slides/01-deep-dive-automation.jpg" />
    </a>
 </div>
 
