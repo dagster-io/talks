@@ -118,17 +118,6 @@ def birds(context: AssetExecutionContext, duckdb: DuckDBResource) -> Materialize
     # point directly to the hosted ZIP files on Cornell's website and drastically simplify this
     # pipeline.
 
-    # construct `union` statement of CSV files for load into `birds` table
-    checklist_file_paths = [
-        f"./data/raw/checklist_data/{os.path.splitext(os.path.basename(checklist_url))[0]}.csv"
-        for checklist_url in CORNELL_BIRDWATCH_CHECKLISTS
-    ]
-
-    sql_csv_select_statements = [
-        f"select * from read_csv_auto('{path}', sample_size=-1)" for path in checklist_file_paths
-    ]
-
-    sql_csv_union_query = " UNION ALL ".join(sql_csv_select_statements)
 
     with duckdb.get_connection() as conn:
         # If the `birds` table already exists, and has a decent chunk of rows, we will skip
@@ -142,6 +131,20 @@ def birds(context: AssetExecutionContext, duckdb: DuckDBResource) -> Materialize
                 context.log.info("Table has already been loaded; skipping...")
                 return MaterializeResult(metadata={"num_rows": nrows})
 
+
+        # construct `union` statement of CSV files for load into `birds` table
+        checklist_file_paths = [
+            f"./data/raw/checklist_data/{os.path.splitext(os.path.basename(checklist_url))[0]}.csv"
+            for checklist_url in CORNELL_BIRDWATCH_CHECKLISTS
+        ]
+
+        sql_csv_select_statements = [
+            f"select * from read_csv_auto('{path}', sample_size=-1)" for path in checklist_file_paths
+        ]
+
+        sql_csv_union_query = " UNION ALL ".join(sql_csv_select_statements)
+
+        conn.execute(f"create or replace table birds as ({sql_csv_union_query})")
         nrows = conn.execute("select count(*) from birds").fetchone()[0]  # type: ignore
         conn.execute(f"create or replace table birds as ({sql_csv_union_query})")
         nrows = conn.execute("select count(*) from birds").fetchone()[0]  # type: ignore
