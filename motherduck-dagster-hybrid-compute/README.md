@@ -21,7 +21,7 @@ make install
 ```
 For Evidence.dev, you will need [nodejs](https://nodejs.org/en/download) installed
 
-> [!NOTE]
+> [!IMPORTANT]
 > At the time of this writing, Evidence requires Node v20. We recommend using [nvm](https://github.com/nvm-sh/nvm) to manage Node versions (eg. `nvm use 20`).
 
 Runing Dagster:
