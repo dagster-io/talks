@@ -1,5 +1,10 @@
 # This file was automatically generated
 name: dagster_hybrid_demo
 type: duckdb
+# The following `filename` env variable is read from the .env file in the project root.
 options:
-  filename: md:?motherduck_token=<replace>
+  # For local use, use relative path from this directory, e.g.
+  # filename: ../../../local.duckdb
+  #
+  # For use with motherduck cloud, use connection string, e.g.
+  # filename: md:?motherduck_token=<replace>

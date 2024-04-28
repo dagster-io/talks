@@ -4,4 +4,4 @@ select
     state,
     total_species_count
 
-from dagster_hybrid_demo.main.top_ducks_by_state
+from main.top_ducks_by_state
