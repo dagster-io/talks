@@ -17,7 +17,7 @@ select
   population_city,
   survey_site_size
 
-from dagster_hybrid_demo.main.all_birds
+from main.all_birds
 
 where
   lower(bird_name) like '%duck%'
