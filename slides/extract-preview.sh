@@ -5,6 +5,6 @@
 # ImageMagick. Used in README for previews.
 #
 
-for f in slides/*.pdf; do
+for f in *.pdf; do
     convert "${f}[0]" "${f/.pdf/.jpg}"
 done

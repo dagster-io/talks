@@ -30,6 +30,9 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
 ## Slides
 
 <div>
+   <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-data-quality.pdf">
+       <img height="140" src="slides/deep-dive-data-quality.jpg" />
+   </a>
    <a href="https://github.com/dagster-io/talks/blob/main/slides/motherduck-dagster-evidence-hybrid-compute.pdf">
        <img height="140" src="slides/motherduck-dagster-evidence-hybrid-compute.jpg" />
    </a>
