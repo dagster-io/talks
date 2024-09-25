@@ -14,6 +14,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
 
  | Date       | Title                                          | Description                                                                                                                            | Code        |
  |------------|------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|-------------|
+ | 2024.09.24 | Dagster Modal Demo                             | Orchestrating ML Workloads with Dagster & Modal                                                                                        | [[code]][6] |
  | 2024.08.06 | Data Quality: Building Reliable Data Platforms | Learn the importance of data quality standards, and how to promote them in your organization                                           | -           |
  | 2024.04.18 | Motherduck, Dagster, Evidence Demo Stack       | Explore the developer productivity gains of using tools like MotherDuck, Dagster, and Evidence.                                        | [[code]][5] |
  | 2024.04.02 | Enable Data Mesh                               | Learn how the Data Mesh paradigm maps to Dagster and enables organizations.                                                            | [[code]][4] |
@@ -26,10 +27,15 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
 [3]: https://github.com/dagster-io/talks/tree/main/dagster-deep-dives/dagster_deep_dives/partitions
 [4]: https://github.com/dagster-io/data-mesh-demo
 [5]: https://github.com/dagster-io/talks/tree/main/motherduck-dagster-hybrid-compute
+[6]: https://github.com/dagster-io/dagster-modal-demo
+
 
 ## Slides
 
 <div>
+   <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-dagster-modal-demo.pdf">
+       <img height="140" src="slides/deep-dive-dagster-modal-demo.jpg" />
+   </a>
    <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-data-quality.pdf">
        <img height="140" src="slides/deep-dive-data-quality.jpg" />
    </a>
