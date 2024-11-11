@@ -10,6 +10,21 @@ This repository is home to presentations and demo projects created by the [Dagst
 
 If you have any questions, you are welcome to contact us on [Slack](https://dagster.io/slack), or through GitHub discussions.
 
+
+## Deep Dive: Orchestrating AI Agents w/ Olivier Dupuis and Izzy Miller
+
+_Published 2024-10-31_
+
+Orchestrating AI Agents with Hex and Dagster
+
+[[Video]](https://www.youtube.com/watch?v=vJpTTSsCuw8)
+
+<div align="center">
+  <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-orchestrating-ai-agents.pdf">
+     <img height="250" src="slides/deep-dive-orchestrating-ai-agents.jpg" />
+  </a>
+</div>
+
 ## Deep Dive: Dagster Modal Demo
 
 _Published 2024-09-24_
