@@ -10,6 +10,20 @@ This repository is home to presentations and demo projects created by the [Dagst
 
 If you have any questions, you are welcome to contact us on [Slack](https://dagster.io/slack), or through GitHub discussions.
 
+## 2025-01-14 - Deep Dive - Shifting Left and Moving Forward
+
+Author(s): Alex Noonan, Colton Padden, Jacob Matson
+
+Modern Data Development with MotherDuck and Dagster
+
+[[Source Code]](https://github.com/dagster-io/dagster/tree/master/examples/project_atproto_dashboard)
+
+<div align="center">
+  <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-motherduck-atproto-demo.pdf">
+     <img height="250" src="slides/deep-dive-motherduck-atproto-demo.jpg" />
+  </a>
+</div>
+
 ## 2024-10-31 - Deep Dive - Orchestrating AI Agents
 
 Author(s): Olivier Dupuis, Izzy Miller, Colton Padden
