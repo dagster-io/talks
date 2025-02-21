@@ -10,6 +10,18 @@ This repository is home to presentations and demo projects created by the [Dagst
 
 If you have any questions, you are welcome to contact us on [Slack](https://dagster.io/slack), or through GitHub discussions.
 
+## 2025-02-11 - Deep Dive - Building Breakthrough AI Applications with Not Diamond
+
+Author(s): Alejandro Companioni, Tomas Kofman, Colton Padden
+
+In this deep dive we are joined by the Not Diamond team to explore how to build breakthrough AI applications by intelligently routing requests to the best-suited models for your application.
+
+<div align="center">
+  <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-not-diamond.pdf">
+     <img height="250" src="slides/deep-dive-not-diamond.jpg" />
+  </a>
+</div>
+
 ## 2025-01-14 - Deep Dive - Shifting Left and Moving Forward
 
 Author(s): Alex Noonan, Colton Padden, Jacob Matson
