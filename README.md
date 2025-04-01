@@ -10,6 +10,18 @@ This repository is home to presentations and demo projects created by the [Dagst
 
 If you have any questions, you are welcome to contact us on [Slack](https://dagster.io/slack), or through GitHub discussions.
 
+## 2025-04-01 - Deep Dive - Cooking with gas: Building a data platform at US Foods
+
+Author(s): Lee Littlejohn, Alex Noonan
+
+Lee walks us through the data platform they've built around Dagster at US Foods.
+
+<div align="center">
+  <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-us-foods.pdf">
+     <img height="250" src="slides/deep-dive-us-foods.jpg" />
+  </a>
+</div>
+
 ## 2025-02-11 - Deep Dive - Building Breakthrough AI Applications with Not Diamond
 
 Author(s): Alejandro Companioni, Tomas Kofman, Colton Padden
