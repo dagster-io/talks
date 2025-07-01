@@ -10,6 +10,18 @@ This repository is home to presentations and demo projects created by the [Dagst
 
 If you have any questions, you are welcome to contact us on [Slack](https://dagster.io/slack), or through GitHub discussions.
 
+## 2025-07-01 - Deep Dive - Breaking Biology's Data Wall
+
+Author(s): Keith Kam
+
+Scaling a multi-disciplinary data platform at Basecamp Research 
+
+<div align="center">
+  <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-basecamp-research.pdf">
+     <img height="250" src="slides/deep-dive-basecamp-research.jpg" />
+  </a>
+</div>
+
 ## 2025-04-01 - Deep Dive - Cooking with gas: Building a data platform at US Foods
 
 Author(s): Lee Littlejohn, Alex Noonan
