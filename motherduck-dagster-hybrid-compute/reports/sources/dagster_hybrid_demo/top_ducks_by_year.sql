@@ -6,4 +6,4 @@ select
   region,
   species_count
 
-from dagster_hybrid_demo.main.top_ducks_by_year
+from main.top_ducks_by_year
