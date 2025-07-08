@@ -10,6 +10,18 @@ This repository is home to presentations and demo projects created by the [Dagst
 
 If you have any questions, you are welcome to contact us on [Slack](https://dagster.io/slack), or through GitHub discussions.
 
+## 2025-07-08 - Deep Dive - dltHub
+
+Author(s): Alena Astrakhantseva, Aashish Nair, Colton Padden, Alex Noonan
+
+Rapidly developing data pipelines with dltHub and Dagster
+
+<div align="center">
+  <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-dlthub.pdf">
+     <img height="250" src="slides/deep-dive-dlthub.jpg" />
+  </a>
+</div>
+
 ## 2025-07-01 - Deep Dive - Breaking Biology's Data Wall
 
 Author(s): Keith Kam
