@@ -5,6 +5,8 @@
 # ImageMagick. Used in README for previews.
 #
 
-for f in *.pdf; do
+_script_dir="$(dirname "$(readlink -f "$0")")"
+
+for f in "$_script_dir"/*.pdf; do
     convert "${f}[0]" "${f/.pdf/.jpg}"
 done
