@@ -10,6 +10,18 @@ This repository is home to presentations and demo projects created by the [Dagst
 
 If you have any questions, you are welcome to contact us on [Slack](https://dagster.io/slack), or through GitHub discussions.
 
+## 2025-10-14 - All Things Open - Enabling community education
+
+Author(s): Colton Padden
+
+See how the team at Dagster creates educational content for the community with a little help from AI.
+
+<div align="center">
+  <a href="https://github.com/dagster-io/talks/blob/main/slides/all-things-open-2025-enabling-community-education.pdf">
+     <img height="250" src="slides/all-things-open-2025-enabling-community-education.jpg" />
+  </a>
+</div>
+
 ## 2025-08-26 - Deep Dive - Dagster Running Dagster: Streaming
 
 Author(s): Nicholas Roach
