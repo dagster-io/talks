@@ -10,6 +10,20 @@ This repository is home to presentations and demo projects created by the [Dagst
 
 If you have any questions, you are welcome to contact us on [Slack](https://dagster.io/slack), or through GitHub discussions.
 
+## 2025-11-04 - Small Data - Composable Data Workflows: Building Pipelines That Just Work
+
+Author(s): Dennis Hume
+
+Learn how to use Dagster and DuckDB to build a Github deduplication pipeline
+
+[[Source Code]](https://github.com/dehume/small-data-sf)
+
+<div align="center">
+  <a href="https://github.com/dagster-io/talks/blob/main/slides/small_data_workshop.pdf">
+     <img height="250" src="slides/small_data_workshop.jpg" />
+  </a>
+</div>
+
 ## 2025-10-14 - All Things Open - Enabling community education
 
 Author(s): Colton Padden
