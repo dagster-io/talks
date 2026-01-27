@@ -35,9 +35,11 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
 
 ### Best Practices for LLM Development
 
-> **📅 Date:** January 27, 2026
-> **👥 Authors:** Alex Noonan, Dennis Hume, Colton Padden
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/Deep Dive - Best Practices for LLM development .pdf)
+<blockquote>
+<strong>📅 Date:</strong> January 27, 2026<br>
+<strong>👥 Authors:</strong> Alex Noonan, Dennis Hume, Colton Padden<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/Deep Dive - Best Practices for LLM development .pdf">Slides</a>
+</blockquote>
 
 Best Practices when using LLMs with Dagster
 
@@ -49,9 +51,11 @@ Best Practices when using LLMs with Dagster
 
 ### Small Data - Composable Data Workflows: Building Pipelines That Just Work
 
-> **📅 Date:** November 4, 2025
-> **👥 Authors:** Dennis Hume
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/small_data_workshop.pdf) • [Source Code](https://github.com/dehume/small-data-sf)
+<blockquote>
+<strong>📅 Date:</strong> November 4, 2025<br>
+<strong>👥 Authors:</strong> Dennis Hume<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/small_data_workshop.pdf">Slides</a> • <a href="https://github.com/dehume/small-data-sf">Source Code</a>
+</blockquote>
 
 Learn how to use Dagster and DuckDB to build a Github deduplication pipeline
 
@@ -63,9 +67,11 @@ Learn how to use Dagster and DuckDB to build a Github deduplication pipeline
 
 ### All Things Open - Enabling community education
 
-> **📅 Date:** October 14, 2025
-> **👥 Authors:** Colton Padden
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/all-things-open-2025-enabling-community-education.pdf)
+<blockquote>
+<strong>📅 Date:</strong> October 14, 2025<br>
+<strong>👥 Authors:</strong> Colton Padden<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/all-things-open-2025-enabling-community-education.pdf">Slides</a>
+</blockquote>
 
 See how the team at Dagster creates educational content for the community with a little help from AI.
 
@@ -77,9 +83,11 @@ See how the team at Dagster creates educational content for the community with a
 
 ### Deep Dive - Dagster Running Dagster: Streaming
 
-> **📅 Date:** August 26, 2025
-> **👥 Authors:** Nicholas Roach
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/dagster-running-dagster_streaming.pdf)
+<blockquote>
+<strong>📅 Date:</strong> August 26, 2025<br>
+<strong>👥 Authors:</strong> Nicholas Roach<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/dagster-running-dagster_streaming.pdf">Slides</a>
+</blockquote>
 
 Learn how Dagster performs streaming using Apache Flink for event log ingestion.
 
@@ -91,9 +99,11 @@ Learn how Dagster performs streaming using Apache Flink for event log ingestion.
 
 ### Deep Dive - dltHub
 
-> **📅 Date:** July 8, 2025
-> **👥 Authors:** Alena Astrakhantseva, Aashish Nair, Colton Padden, Alex Noonan
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/deep-dive-dlthub.pdf)
+<blockquote>
+<strong>📅 Date:</strong> July 8, 2025<br>
+<strong>👥 Authors:</strong> Alena Astrakhantseva, Aashish Nair, Colton Padden, Alex Noonan<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-dlthub.pdf">Slides</a>
+</blockquote>
 
 Rapidly developing data pipelines with dltHub and Dagster
 
@@ -105,9 +115,11 @@ Rapidly developing data pipelines with dltHub and Dagster
 
 ### Deep Dive - Breaking Biology's Data Wall
 
-> **📅 Date:** July 1, 2025
-> **👥 Authors:** Keith Kam
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/deep-dive-basecamp-research.pdf)
+<blockquote>
+<strong>📅 Date:</strong> July 1, 2025<br>
+<strong>👥 Authors:</strong> Keith Kam<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-basecamp-research.pdf">Slides</a>
+</blockquote>
 
 Scaling a multi-disciplinary data platform at Basecamp Research
 
@@ -119,9 +131,11 @@ Scaling a multi-disciplinary data platform at Basecamp Research
 
 ### Deep Dive - Cooking with gas: Building a data platform at US Foods
 
-> **📅 Date:** April 1, 2025
-> **👥 Authors:** Lee Littlejohn, Alex Noonan
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/deep-dive-us-foods.pdf)
+<blockquote>
+<strong>📅 Date:</strong> April 1, 2025<br>
+<strong>👥 Authors:</strong> Lee Littlejohn, Alex Noonan<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-us-foods.pdf">Slides</a>
+</blockquote>
 
 Lee walks us through the data platform they've built around Dagster at US Foods.
 
@@ -133,9 +147,11 @@ Lee walks us through the data platform they've built around Dagster at US Foods.
 
 ### Deep Dive - Building Breakthrough AI Applications with Not Diamond
 
-> **📅 Date:** February 11, 2025
-> **👥 Authors:** Alejandro Companioni, Tomas Kofman, Colton Padden
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/deep-dive-not-diamond.pdf)
+<blockquote>
+<strong>📅 Date:</strong> February 11, 2025<br>
+<strong>👥 Authors:</strong> Alejandro Companioni, Tomas Kofman, Colton Padden<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-not-diamond.pdf">Slides</a>
+</blockquote>
 
 In this deep dive we are joined by the Not Diamond team to explore how to build breakthrough AI applications by intelligently routing requests to the best-suited models for your application.
 
@@ -147,9 +163,11 @@ In this deep dive we are joined by the Not Diamond team to explore how to build 
 
 ### Deep Dive - Shifting Left and Moving Forward
 
-> **📅 Date:** January 14, 2025
-> **👥 Authors:** Alex Noonan, Colton Padden, Jacob Matson
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/deep-dive-motherduck-atproto-demo.pdf) • [Source Code](https://github.com/dagster-io/dagster/tree/master/examples/project_atproto_dashboard)
+<blockquote>
+<strong>📅 Date:</strong> January 14, 2025<br>
+<strong>👥 Authors:</strong> Alex Noonan, Colton Padden, Jacob Matson<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-motherduck-atproto-demo.pdf">Slides</a> • <a href="https://github.com/dagster-io/dagster/tree/master/examples/project_atproto_dashboard">Source Code</a>
+</blockquote>
 
 Modern Data Development with MotherDuck and Dagster
 
@@ -161,9 +179,11 @@ Modern Data Development with MotherDuck and Dagster
 
 ### Deep Dive - Orchestrating AI Agents
 
-> **📅 Date:** October 31, 2024
-> **👥 Authors:** Olivier Dupuis, Izzy Miller, Colton Padden
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/deep-dive-orchestrating-ai-agents.pdf) • [Video](https://www.youtube.com/watch?v=vJpTTSsCuw8)
+<blockquote>
+<strong>📅 Date:</strong> October 31, 2024<br>
+<strong>👥 Authors:</strong> Olivier Dupuis, Izzy Miller, Colton Padden<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-orchestrating-ai-agents.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=vJpTTSsCuw8">Video</a>
+</blockquote>
 
 Orchestrating AI Agents with Hex and Dagster
 
@@ -175,9 +195,11 @@ Orchestrating AI Agents with Hex and Dagster
 
 ### Deep Dive - The Evolution of Data Catalogs
 
-> **📅 Date:** October 15, 2024
-> **👥 Authors:** Alex Noonan
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/deep-dive-data-catalogs.pdf) • [Video](https://www.youtube.com/watch?v=ogqCQvG9iVs)
+<blockquote>
+<strong>📅 Date:</strong> October 15, 2024<br>
+<strong>👥 Authors:</strong> Alex Noonan<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-data-catalogs.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=ogqCQvG9iVs">Video</a>
+</blockquote>
 
 The Evolution of Data Catalogs and Why They Matter
 
@@ -189,9 +211,11 @@ The Evolution of Data Catalogs and Why They Matter
 
 ### Deep Dive - Dagster Modal Demo
 
-> **📅 Date:** September 24, 2024
-> **👥 Authors:** Charles Frye, Colton Padden
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/deep-dive-dagster-modal-demo.pdf) • [Source Code](https://github.com/dagster-io/dagster-modal-demo) • [Video](https://www.youtube.com/watch?v=z_4KBYsyjks)
+<blockquote>
+<strong>📅 Date:</strong> September 24, 2024<br>
+<strong>👥 Authors:</strong> Charles Frye, Colton Padden<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-dagster-modal-demo.pdf">Slides</a> • <a href="https://github.com/dagster-io/dagster-modal-demo">Source Code</a> • <a href="https://www.youtube.com/watch?v=z_4KBYsyjks">Video</a>
+</blockquote>
 
 Orchestrating ML Workloads with Dagster & Modal
 
@@ -203,9 +227,11 @@ Orchestrating ML Workloads with Dagster & Modal
 
 ### Building a True Data Platform: Beyond the Modern Data Stack
 
-> **📅 Date:** September 6, 2024
-> **👥 Authors:** Pedram Navid
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/building-a-true-data-platform.pdf) • [Video](https://www.youtube.com/watch?v=-L6ViEPnyLA)
+<blockquote>
+<strong>📅 Date:</strong> September 6, 2024<br>
+<strong>👥 Authors:</strong> Pedram Navid<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/building-a-true-data-platform.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=-L6ViEPnyLA">Video</a>
+</blockquote>
 
 <div align="center">
   <a href="https://github.com/dagster-io/talks/blob/main/slides/building-a-true-data-platform.pdf">
@@ -215,9 +241,11 @@ Orchestrating ML Workloads with Dagster & Modal
 
 ### Dagster, SDF, & the Evolution of the Data Platform
 
-> **📅 Date:** August 22, 2024
-> **👥 Authors:** Lukas Schulte, Pedram Navid
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/sdf.pdf) • [Video](https://www.youtube.com/watch?v=PTGjbCMnUSE)
+<blockquote>
+<strong>📅 Date:</strong> August 22, 2024<br>
+<strong>👥 Authors:</strong> Lukas Schulte, Pedram Navid<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/sdf.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=PTGjbCMnUSE">Video</a>
+</blockquote>
 
 <div align="center">
   <a href="https://github.com/dagster-io/talks/blob/main/slides/sdf.pdf">
@@ -227,9 +255,11 @@ Orchestrating ML Workloads with Dagster & Modal
 
 ### Deep Dive - Data Quality
 
-> **📅 Date:** August 6, 2024
-> **👥 Authors:** Colton Padden
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/deep-dive-data-quality.pdf) • [Video](https://www.youtube.com/watch?v=vT0sSKEPE3A)
+<blockquote>
+<strong>📅 Date:</strong> August 6, 2024<br>
+<strong>👥 Authors:</strong> Colton Padden<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-data-quality.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=vT0sSKEPE3A">Video</a>
+</blockquote>
 
 Learn the importance of data quality standards, and how to promote them in your organization
 
@@ -241,9 +271,11 @@ Learn the importance of data quality standards, and how to promote them in your 
 
 ### Motherduck, Dagster, Evidence Demo
 
-> **📅 Date:** April 18, 2024
-> **👥 Authors:** Colton Padden, Alex, Monahan
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/motherduck-dagster-evidence-hybrid-compute.pdf) • [Source Code](https://github.com/dagster-io/talks/tree/main/motherduck-dagster-hybrid-compute)
+<blockquote>
+<strong>📅 Date:</strong> April 18, 2024<br>
+<strong>👥 Authors:</strong> Colton Padden, Alex, Monahan<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/motherduck-dagster-evidence-hybrid-compute.pdf">Slides</a> • <a href="https://github.com/dagster-io/talks/tree/main/motherduck-dagster-hybrid-compute">Source Code</a>
+</blockquote>
 
 Explore the developer productivity gains of using tools like MotherDuck, Dagster, and Evidence.
 
@@ -255,15 +287,19 @@ Explore the developer productivity gains of using tools like MotherDuck, Dagster
 
 ### Deep Dive - Enable Data Mesh
 
-> **📅 Date:** April 2, 2024
-> **🔗 Resources:** [Source Code](https://github.com/dagster-io/data-mesh-demo) • [Video](https://www.youtube.com/watch?v=laEX2VSq_CQ)
+<blockquote>
+<strong>📅 Date:</strong> April 2, 2024<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/data-mesh-demo">Source Code</a> • <a href="https://www.youtube.com/watch?v=laEX2VSq_CQ">Video</a>
+</blockquote>
 
 Learn how the Data Mesh paradigm maps to Dagster and enables organizations.
 
 ### Deep Dive - Thinking in Partitions
 
-> **📅 Date:** March 5, 2024
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/03-deep-dive-partitions.pdf) • [Source Code](https://github.com/dagster-io/talks/tree/main/dagster-deep-dives/dagster_deep_dives/partitions) • [Video](https://www.youtube.com/watch?v=9U5OEQtDl-s)
+<blockquote>
+<strong>📅 Date:</strong> March 5, 2024<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/03-deep-dive-partitions.pdf">Slides</a> • <a href="https://github.com/dagster-io/talks/tree/main/dagster-deep-dives/dagster_deep_dives/partitions">Source Code</a> • <a href="https://www.youtube.com/watch?v=9U5OEQtDl-s">Video</a>
+</blockquote>
 
 See how pipelines can be parallelized and scale using Dagster partitions.
 
@@ -275,8 +311,10 @@ See how pipelines can be parallelized and scale using Dagster partitions.
 
 ### Deep Dive - Resources & Configurations
 
-> **📅 Date:** February 20, 2024
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/02-deep-dive-resources.pdf) • [Source Code](https://github.com/dagster-io/talks/tree/main/dagster-deep-dives/dagster_deep_dives/resources_and_configurations) • [Video](https://www.youtube.com/watch?v=i6m7k16W-yg)
+<blockquote>
+<strong>📅 Date:</strong> February 20, 2024<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/02-deep-dive-resources.pdf">Slides</a> • <a href="https://github.com/dagster-io/talks/tree/main/dagster-deep-dives/dagster_deep_dives/resources_and_configurations">Source Code</a> • <a href="https://www.youtube.com/watch?v=i6m7k16W-yg">Video</a>
+</blockquote>
 
 Learn how to a build a platform that promotes reusability and extensibility with configurations and resources.
 
@@ -288,8 +326,10 @@ Learn how to a build a platform that promotes reusability and extensibility with
 
 ### Deep Dive - Automations
 
-> **📅 Date:** February 13, 2024
-> **🔗 Resources:** [Slides](https://github.com/dagster-io/talks/blob/main/slides/01-deep-dive-automation.pdf) • [Source Code](https://github.com/dagster-io/talks/tree/main/dagster-deep-dives/dagster_deep_dives/automation) • [Video](https://www.youtube.com/watch?v=2JbBP8vR5o8)
+<blockquote>
+<strong>📅 Date:</strong> February 13, 2024<br>
+<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/01-deep-dive-automation.pdf">Slides</a> • <a href="https://github.com/dagster-io/talks/tree/main/dagster-deep-dives/dagster_deep_dives/automation">Source Code</a> • <a href="https://www.youtube.com/watch?v=2JbBP8vR5o8">Video</a>
+</blockquote>
 
 Explore the concepts of _automation_ on the Dagster platform through cron-based schedules, sensors, and auto-materialization policies.
 
