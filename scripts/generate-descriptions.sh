@@ -17,12 +17,15 @@ if [ ! -d "$_slides_dir" ]; then
     exit 1
 fi
 
-# Function to generate description using Claude CLI
+# Function to generate description using Claude CLI with retry logic
 generate_with_claude() {
     local content="$1"
     local title="$2"
+    local max_retries=2
+    local retry=0
 
-    claude --print <<EOF
+    while [ $retry -le $max_retries ]; do
+        local result=$(claude --print 2>&1 <<EOF
 You are a technical writer creating a 1-2 sentence description for a presentation.
 
 Title: $title
@@ -39,6 +42,23 @@ $content
 
 Description:
 EOF
+)
+
+        # Check if result contains an error or is empty
+        if [ -n "$result" ] && ! echo "$result" | grep -q "Error:"; then
+            echo "$result"
+            return 0
+        fi
+
+        ((retry++))
+        if [ $retry -le $max_retries ]; then
+            sleep 2
+        fi
+    done
+
+    # Return error marker if all retries failed
+    echo "ERROR: Failed to generate description after $max_retries retries"
+    return 1
 }
 
 # Function to process a single PDF file
@@ -56,6 +76,13 @@ process_pdf() {
 
     # Generate description with Claude CLI
     local description=$(generate_with_claude "$text" "$filename")
+
+    # Check if generation failed
+    if [ $? -ne 0 ] || echo "$description" | grep -q "^ERROR:"; then
+        echo "  Warning: Failed to generate description for $filename"
+        echo "  $description"
+        return 1
+    fi
 
     # Output result
     echo ""
@@ -81,6 +108,13 @@ process_markdown() {
 
     # Generate description with Claude CLI
     local description=$(generate_with_claude "$text" "$filename")
+
+    # Check if generation failed
+    if [ $? -ne 0 ] || echo "$description" | grep -q "^ERROR:"; then
+        echo "  Warning: Failed to generate description for $filename"
+        echo "  $description"
+        return 1
+    fi
 
     # Output result
     echo ""
@@ -121,8 +155,9 @@ else
 
     echo "Found $pdf_count PDF file(s) in $_slides_dir..."
 
-    # Counter
+    # Counters
     generated=0
+    failed=0
 
     # Process all PDFs
     for f in "$_slides_dir"/*.pdf; do
@@ -131,9 +166,18 @@ else
 
         if process_pdf "$f"; then
             ((generated++))
+        else
+            ((failed++))
         fi
+
+        # Small delay between API calls to avoid rate limits
+        sleep 1
     done
 
     echo ""
-    echo "✓ Complete: $generated descriptions generated"
+    if [ $failed -eq 0 ]; then
+        echo "✓ Complete: $generated descriptions generated"
+    else
+        echo "✓ Complete: $generated descriptions generated, $failed failed"
+    fi
 fi
