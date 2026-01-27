@@ -2,7 +2,7 @@
 
 ## Adding a talk
 
-Copy the PDF file to the `scripts/` directory.
+Copy the PDF file to the `slides/` directory.
 
 ```
 cp ~/Downloads/deep-dive-dagster-modal-demo.pdf slides/.
@@ -11,7 +11,7 @@ cp ~/Downloads/deep-dive-dagster-modal-demo.pdf slides/.
 Run the script to generate an image preview of the first slide.
 
 ```
-./slides/extract-preview.sh
+make generate-thumbnails
 ```
 
 And then create an entry at the top of README.md with the talk details.
