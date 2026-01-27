@@ -1,7 +1,0 @@
-sources:
-  - name: main
-    tables:
-      - name: birds
-      - name: sites
-      - name: species
-
