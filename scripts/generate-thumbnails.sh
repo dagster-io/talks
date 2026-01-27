@@ -1,8 +1,9 @@
 #!/bin/bash
 
 #
-# Extract the first slide from each PDF present in the `slides/` directory as a `jpg` using
-# ImageMagick. Used in README for previews.
+# Generate JPG thumbnails from the first slide of each PDF in the `slides/` directory
+# using ImageMagick. Skips PDFs that already have corresponding thumbnails.
+# Used in README for previews.
 #
 
 # Get the repository root (parent of scripts directory)
@@ -23,16 +24,28 @@ if [ "$pdf_count" -eq 0 ]; then
     exit 0
 fi
 
-echo "Processing $pdf_count PDF file(s) in $_slides_dir..."
+echo "Found $pdf_count PDF file(s) in $_slides_dir..."
 
-# Extract first slide from each PDF
+# Counters
+generated=0
+skipped=0
+
+# Generate thumbnails for PDFs without existing JPGs
 for f in "$_slides_dir"/*.pdf; do
     # Skip if glob didn't match any files
     [ -e "$f" ] || continue
 
     output="${f/.pdf/.jpg}"
-    echo "  Extracting: $(basename "$f") -> $(basename "$output")"
-    convert "${f}[0]" "$output"
+
+    if [ -f "$output" ]; then
+        echo "  Skipping: $(basename "$f") (thumbnail exists)"
+        ((skipped++))
+    else
+        echo "  Generating: $(basename "$f") -> $(basename "$output")"
+        convert "${f}[0]" "$output"
+        ((generated++))
+    fi
 done
 
-echo "✓ Thumbnail generation complete"
+echo ""
+echo "✓ Complete: $generated generated, $skipped skipped"
