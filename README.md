@@ -60,7 +60,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> November 4, 2025<br>
   <strong>👥 Authors:</strong> Dennis Hume<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/small_data_workshop.pdf">Slides</a> • <a href="https://github.com/dehume/small-data-sf">Source Code</a><br><br>
-  Learn how to use Dagster and DuckDB to build a Github deduplication pipeline
+  Learn how to build a zero-cost GitHub issue deduplication system using Dagster and DuckDB, covering data ingestion, embeddings generation, and composable workflow automation.
 </td>
 </tr>
 </table>
@@ -96,7 +96,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> August 26, 2025<br>
   <strong>👥 Authors:</strong> Nicholas Roach<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/dagster-running-dagster_streaming.pdf">Slides</a><br><br>
-  Learn how Dagster performs streaming using Apache Flink for event log ingestion.
+  Learn how Dagster Labs uses Dagster to power its own internal data platform, including implementing streaming event ingestion for Dagster+ and testing experimental features in production.
 </td>
 </tr>
 </table>
@@ -132,7 +132,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> July 1, 2025<br>
   <strong>👥 Authors:</strong> Keith Kam<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-basecamp-research.pdf">Slides</a><br><br>
-  Scaling a multi-disciplinary data platform at Basecamp Research
+  Learn how Basecamp Research scaled a multi-disciplinary data platform to power BioAI foundation models and overcome the unique challenges of managing biological data at scale.
 </td>
 </tr>
 </table>
@@ -150,7 +150,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> April 1, 2025<br>
   <strong>👥 Authors:</strong> Lee Littlejohn, Alex Noonan<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-us-foods.pdf">Slides</a><br><br>
-  Lee walks us through the data platform they've built around Dagster at US Foods.
+  Discover how US Foods transformed their fragmented data infrastructure into a scalable, organized data platform using Dagster, Snowflake, and AWS with infrastructure as code, achieving improved visibility, faster onboarding, and team self-service.
 </td>
 </tr>
 </table>
@@ -222,7 +222,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> October 15, 2024<br>
   <strong>👥 Authors:</strong> Alex Noonan<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-data-catalogs.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=ogqCQvG9iVs">Video</a><br><br>
-  The Evolution of Data Catalogs and Why They Matter
+  Learn how data catalogs have evolved to enable data discovery through metadata collection and indexing, and explore Dagster's approach to addressing the limitations of traditional catalog solutions.
 </td>
 </tr>
 </table>
@@ -240,7 +240,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> September 24, 2024<br>
   <strong>👥 Authors:</strong> Charles Frye, Colton Padden<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-dagster-modal-demo.pdf">Slides</a> • <a href="https://github.com/dagster-io/dagster-modal-demo">Source Code</a> • <a href="https://www.youtube.com/watch?v=z_4KBYsyjks">Video</a><br><br>
-  Orchestrating ML Workloads with Dagster & Modal
+  Learn how to orchestrate scalable ML workloads by combining Dagster's state management and observability with Modal's auto-scaling infrastructure and GPU provisioning.
 </td>
 </tr>
 </table>
@@ -275,7 +275,8 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
 <td valign="top">
   <strong>📅 Date:</strong> August 22, 2024<br>
   <strong>👥 Authors:</strong> Lukas Schulte, Pedram Navid<br>
-  <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/sdf.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=PTGjbCMnUSE">Video</a>
+  <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/sdf.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=PTGjbCMnUSE">Video</a><br><br>
+  Learn how Dagster and SDF combine to bridge the gap between orchestration and transformation, enabling local SQL development, enhanced data quality, and seamless integration between data platforms.
 </td>
 </tr>
 </table>
@@ -293,7 +294,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> August 6, 2024<br>
   <strong>👥 Authors:</strong> Colton Padden<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-data-quality.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=vT0sSKEPE3A">Video</a><br><br>
-  Learn how to build reliable data platforms by implementing the 6 dimensions of data quality using Dagster asset checks and exploring best practices for data validation across your data lifecycle.
+  Learn how to build reliable data platforms using Dagster's data quality features and explore the six key dimensions of data quality: timeliness, completeness, accuracy, validity, consistency, and uniqueness.
 </td>
 </tr>
 </table>
@@ -365,7 +366,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> February 20, 2024<br>
   <strong>👥 Authors:</strong> Colton Padden<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/02-deep-dive-resources.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=i6m7k16W-yg">Video</a><br><br>
-  Learn how to a build a platform that promotes reusability and extensibility with configurations and resources.
+  Learn how to use Dagster's configurations and resources to build reusable, flexible data pipelines that can be tested locally and deployed to production with confidence.
 </td>
 </tr>
 </table>
