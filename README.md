@@ -321,10 +321,20 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
 
 ### Deep Dive - Enable Data Mesh
 
-<strong>📅 Date:</strong> April 2, 2024<br>
-<strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/data-mesh-demo">Source Code</a> • <a href="https://www.youtube.com/watch?v=laEX2VSq_CQ">Video</a>
-
-Learn how the Data Mesh paradigm maps to Dagster and enables organizations.
+<table>
+<tr>
+<td width="250" valign="top">
+  <a href="https://github.com/dagster-io/talks/blob/main/slides/Dagster Deep Dives - Enable Data Mesh.pdf">
+    <img src="slides/Dagster Deep Dives - Enable Data Mesh.jpg" width="250" />
+  </a>
+</td>
+<td valign="top">
+  <strong>📅 Date:</strong> April 2, 2024<br>
+  <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/Dagster Deep Dives - Enable Data Mesh.pdf">Slides</a> • <a href="https://github.com/dagster-io/data-mesh-demo">Source Code</a> • <a href="https://www.youtube.com/watch?v=laEX2VSq_CQ">Video</a><br><br>
+  Learn how the Data Mesh paradigm maps to Dagster and enables organizations.
+</td>
+</tr>
+</table>
 
 ### Deep Dive - Thinking in Partitions
 
