@@ -312,7 +312,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
 </td>
 <td valign="top">
   <strong>📅 Date:</strong> April 18, 2024<br>
-  <strong>👥 Authors:</strong> Colton Padden, Alex, Monahan<br>
+  <strong>👥 Authors:</strong> Colton Padden, Alex Monahan<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/motherduck-dagster-evidence-hybrid-compute.pdf">Slides</a><br><br>
   Explore the developer productivity gains of using tools like MotherDuck, Dagster, and Evidence.
 </td>
