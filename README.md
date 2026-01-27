@@ -1,8 +1,4 @@
-<div align="center">
-  <a target="_blank" href="https://dagster.io" style="background:none">
-    <img alt="dagster logo" src="https://raw.githubusercontent.com/dagster-io/talks/master/.github/dagster-logo.png" width="auto" height="48px">
-  </a>
-</div>
+
 
 # Talks
 
@@ -391,3 +387,11 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
 </td>
 </tr>
 </table>
+
+---
+
+<div align="center">
+  <a target="_blank" href="https://dagster.io" style="background:none">
+    <img alt="dagster logo" src="https://github.com/user-attachments/assets/3ac967a7-01a2-4094-8675-57a6badaaf60" width="auto" height="64px">
+  </a>
+</div>
