@@ -42,7 +42,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> January 27, 2026<br>
   <strong>👥 Authors:</strong> Alex Noonan, Dennis Hume, Colton Padden<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/Deep Dive - Best Practices for LLM development .pdf">Slides</a><br><br>
-  Best Practices when using LLMs with Dagster
+  Learn best practices for integrating LLMs into Dagster pipelines, covering the development lifecycle, common pitfalls to avoid, and how to leverage the official Claude plugin for AI-powered data orchestration.
 </td>
 </tr>
 </table>
@@ -168,7 +168,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> February 11, 2025<br>
   <strong>👥 Authors:</strong> Alejandro Companioni, Tomas Kofman, Colton Padden<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-not-diamond.pdf">Slides</a><br><br>
-  In this deep dive we are joined by the Not Diamond team to explore how to build breakthrough AI applications by intelligently routing requests to the best-suited models for your application.
+  Learn how to use Not Diamond's intelligent LLM routing with Dagster to automatically select the best model for each task, optimizing for quality, cost, and latency in your AI pipelines.
 </td>
 </tr>
 </table>
@@ -186,7 +186,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> January 14, 2025<br>
   <strong>👥 Authors:</strong> Alex Noonan, Colton Padden, Jacob Matson<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-motherduck-atproto-demo.pdf">Slides</a> • <a href="https://github.com/dagster-io/dagster/tree/master/examples/project_atproto_dashboard">Source Code</a><br><br>
-  Modern Data Development with MotherDuck and Dagster
+  Learn how to build modern data pipelines with Dagster and MotherDuck through a hands-on Bluesky data platform demo that demonstrates shifting left in data engineering.
 </td>
 </tr>
 </table>
@@ -204,7 +204,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> October 31, 2024<br>
   <strong>👥 Authors:</strong> Olivier Dupuis, Izzy Miller, Colton Padden<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-orchestrating-ai-agents.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=vJpTTSsCuw8">Video</a><br><br>
-  Orchestrating AI Agents with Hex and Dagster
+  Learn how to build and orchestrate AI agent prototypes within a data platform using LangChain, Hex, and Dagster to enrich unstructured climate narratives data.
 </td>
 </tr>
 </table>
@@ -257,7 +257,8 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
 <td valign="top">
   <strong>📅 Date:</strong> September 6, 2024<br>
   <strong>👥 Authors:</strong> Pedram Navid<br>
-  <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/building-a-true-data-platform.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=-L6ViEPnyLA">Video</a>
+  <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/building-a-true-data-platform.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=-L6ViEPnyLA">Video</a><br><br>
+  Explore the shortcomings of the Modern Data Stack and discover how to build a unified data platform using Dagster that delivers on the promises of scalability, observability, and maintainability.
 </td>
 </tr>
 </table>
@@ -292,7 +293,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> August 6, 2024<br>
   <strong>👥 Authors:</strong> Colton Padden<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-data-quality.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=vT0sSKEPE3A">Video</a><br><br>
-  Learn the importance of data quality standards, and how to promote them in your organization
+  Learn how to build reliable data platforms by implementing the 6 dimensions of data quality using Dagster asset checks and exploring best practices for data validation across your data lifecycle.
 </td>
 </tr>
 </table>
@@ -310,7 +311,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> April 18, 2024<br>
   <strong>👥 Authors:</strong> Colton Padden, Alex Monahan<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/motherduck-dagster-evidence-hybrid-compute.pdf">Slides</a><br><br>
-  Explore the developer productivity gains of using tools like MotherDuck, Dagster, and Evidence.
+  Learn how to seamlessly transition data pipelines from local development to production using MotherDuck's hybrid compute architecture with Dagster orchestration, dbt transformations, and Evidence dashboards.
 </td>
 </tr>
 </table>
@@ -328,7 +329,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> April 2, 2024<br>
   <strong>👥 Authors:</strong> Tim Castillo<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/Dagster Deep Dives - Enable Data Mesh.pdf">Slides</a> • <a href="https://github.com/dagster-io/data-mesh-demo">Source Code</a> • <a href="https://www.youtube.com/watch?v=laEX2VSq_CQ">Video</a><br><br>
-  Learn how the Data Mesh paradigm maps to Dagster and enables organizations.
+  Learn how to enable a data mesh paradigm with Dagster by implementing the four core principles of domain-driven ownership, data-as-a-product, federated governance, and self-serve platforms.
 </td>
 </tr>
 </table>
@@ -346,7 +347,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> March 5, 2024<br>
   <strong>👥 Authors:</strong> Tim Castillo<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/03-deep-dive-partitions.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=9U5OEQtDl-s">Video</a><br><br>
-  See how pipelines can be parallelized and scale using Dagster partitions.
+  Learn how to use Dagster partitions to break the linear relationship between growing data volumes and pipeline resource consumption.
 </td>
 </tr>
 </table>
@@ -383,7 +384,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>📅 Date:</strong> February 13, 2024<br>
   <strong>👥 Authors:</strong> Pedram Navid<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/01-deep-dive-automation.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=2JbBP8vR5o8">Video</a><br><br>
-  Explore the concepts of _automation_ on the Dagster platform through cron-based schedules, sensors, and auto-materialization policies.
+  Learn how to automate your Dagster data pipelines using schedules, sensors, and auto-materialize policies to eliminate manual execution and simplify complex workflows.
 </td>
 </tr>
 </table>

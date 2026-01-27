@@ -1,4 +1,4 @@
-.PHONY: help generate-thumbnails
+.PHONY: help generate-thumbnails generate-descriptions generate-description
 
 help:  ## Show this help message
 	@echo "Available targets:"
@@ -6,3 +6,9 @@ help:  ## Show this help message
 
 generate-thumbnails:  ## Generate JPG thumbnails from PDF slides
 	@./scripts/generate-thumbnails.sh
+
+generate-descriptions:  ## Generate descriptions for all presentations
+	@./scripts/generate-descriptions.sh
+
+generate-description:  ## Generate description for single presentation (path=<file>)
+	@./scripts/generate-descriptions.sh $(path)
