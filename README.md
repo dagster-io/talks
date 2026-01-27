@@ -337,7 +337,7 @@ Learn how the Data Mesh paradigm maps to Dagster and enables organizations.
 </td>
 <td valign="top">
   <strong>📅 Date:</strong> March 5, 2024<br>
-  <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/03-deep-dive-partitions.pdf">Slides</a> • <a href="https://github.com/dagster-io/talks/tree/main/dagster-deep-dives/dagster_deep_dives/partitions">Source Code</a> • <a href="https://www.youtube.com/watch?v=9U5OEQtDl-s">Video</a><br><br>
+  <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/03-deep-dive-partitions.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=9U5OEQtDl-s">Video</a><br><br>
   See how pipelines can be parallelized and scale using Dagster partitions.
 </td>
 </tr>
@@ -354,7 +354,7 @@ Learn how the Data Mesh paradigm maps to Dagster and enables organizations.
 </td>
 <td valign="top">
   <strong>📅 Date:</strong> February 20, 2024<br>
-  <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/02-deep-dive-resources.pdf">Slides</a> • <a href="https://github.com/dagster-io/talks/tree/main/dagster-deep-dives/dagster_deep_dives/resources_and_configurations">Source Code</a> • <a href="https://www.youtube.com/watch?v=i6m7k16W-yg">Video</a><br><br>
+  <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/02-deep-dive-resources.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=i6m7k16W-yg">Video</a><br><br>
   Learn how to a build a platform that promotes reusability and extensibility with configurations and resources.
 </td>
 </tr>
@@ -372,7 +372,7 @@ Learn how the Data Mesh paradigm maps to Dagster and enables organizations.
 </td>
 <td valign="top">
   <strong>📅 Date:</strong> February 13, 2024<br>
-  <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/01-deep-dive-automation.pdf">Slides</a> • <a href="https://github.com/dagster-io/talks/tree/main/dagster-deep-dives/dagster_deep_dives/automation">Source Code</a> • <a href="https://www.youtube.com/watch?v=2JbBP8vR5o8">Video</a><br><br>
+  <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/01-deep-dive-automation.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=2JbBP8vR5o8">Video</a><br><br>
   Explore the concepts of _automation_ on the Dagster platform through cron-based schedules, sensors, and auto-materialization policies.
 </td>
 </tr>
