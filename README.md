@@ -10,6 +10,18 @@ This repository is home to presentations and demo projects created by the [Dagst
 
 If you have any questions, you are welcome to contact us on [Slack](https://dagster.io/slack), or through GitHub discussions.
 
+## 2026-01-27 - Best Practices for LLM Development
+
+Author(s): Alex Noonan, Dennis Hume, Colton Padden
+
+Best Practices when using LLMs with Dagster
+
+<div align="center">
+  <a href="https://github.com/dagster-io/talks/blob/main/slides/Deep Dive - Best Practices for LLM development .pdf">
+     <img height="250" src="https://github.com/dagster-io/talks/blob/main/slides/Deep Dive - Best Practices for LLM development .jpg" />
+  </a>
+</div>
+
 ## 2025-11-04 - Small Data - Composable Data Workflows: Building Pipelines That Just Work
 
 Author(s): Dennis Hume
