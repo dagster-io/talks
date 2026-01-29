@@ -34,8 +34,8 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
 <table>
 <tr>
 <td width="250" valign="top">
-  <a href="https://github.com/dagster-io/talks/blob/main/slides/Deep Dive - Best Practices for LLM development .pdf">
-    <img src="https://github.com/dagster-io/talks/blob/main/slides/Deep Dive - Best Practices for LLM development .jpg" width="250" />
+  <a href="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-best-practices-for-llms.pdf">
+    <img src="https://github.com/dagster-io/talks/blob/main/slides/deep-dive-best-practices-for-llms.jpg" width="250" />
   </a>
 </td>
 <td valign="top">
