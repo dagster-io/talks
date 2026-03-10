@@ -8,6 +8,7 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
 
 ## Table of Contents
 
+- [Deep Dive - Dagster Running Dagster: Compass](#deep-dive---dagster-running-dagster-compass)
 - [Best Practices for LLM Development](#best-practices-for-llm-development)
 - [Building a Better Feedback Loop (Data Tune 2026)](#building-a-better-feedback-loop-data-tune-2026)
 - [Small Data - Composable Data Workflows: Building Pipelines That Just Work](#small-data---composable-data-workflows-building-pipelines-that-just-work)
@@ -30,6 +31,22 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
 - [Deep Dive - Thinking in Partitions](#deep-dive---thinking-in-partitions)
 - [Deep Dive - Resources & Configurations](#deep-dive---resources--configurations)
 - [Deep Dive - Automations](#deep-dive---automations)
+
+### Deep Dive - Dagster Running Dagster: Compass
+
+<table>
+<tr>
+<td width="250" valign="top">
+  <a href="https://github.com/dagster-io/talks/blob/main/slides/dagster-running-dagster-compass.pdf">
+    <img src="slides/dagster-running-dagster-compass.jpg" width="250" />
+  </a>
+</td>
+<td valign="top">
+  <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/dagster-running-dagster-compass.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=-H2kW0ys0R8">Video</a><br><br>
+  Learn how Dagster Labs uses Dagster to power its own internal data platform with Compass.
+</td>
+</tr>
+</table>
 
 ### Best Practices for LLM Development
 
