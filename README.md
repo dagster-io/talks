@@ -10,9 +10,11 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
 
 - [Deep Dive - Dagster Running Dagster: Compass](#deep-dive---dagster-running-dagster-compass)
 - [Best Practices for LLM Development](#best-practices-for-llm-development)
+- [Building a Better Feedback Loop (Data Tune 2026)](#building-a-better-feedback-loop-data-tune-2026)
 - [Small Data - Composable Data Workflows: Building Pipelines That Just Work](#small-data---composable-data-workflows-building-pipelines-that-just-work)
 - [All Things Open - Enabling community education](#all-things-open---enabling-community-education)
 - [Deep Dive - Dagster Running Dagster: Streaming](#deep-dive---dagster-running-dagster-streaming)
+- [Deep Dive - Dagster Running Dagster: Compass](#deep-dive---dagster-running-dagster-compass)
 - [Deep Dive - dltHub](#deep-dive---dlthub)
 - [Deep Dive - Breaking Biology's Data Wall](#deep-dive---breaking-biologys-data-wall)
 - [Deep Dive - Cooking with gas: Building a data platform at US Foods](#deep-dive---cooking-with-gas-building-a-data-platform-at-us-foods)
@@ -60,6 +62,22 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
   <strong>👥 Authors:</strong> Alex Noonan, Dennis Hume, Colton Padden<br>
   <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/Deep Dive - Best Practices for LLM development .pdf">Slides</a><br><br>
   Learn best practices for integrating LLMs into Dagster pipelines, covering the development lifecycle, common pitfalls to avoid, and how to leverage the official Claude plugin for AI-powered data orchestration.
+</td>
+</tr>
+</table>
+
+### Building a Better Feedback Loop (Data Tune 2026)
+
+<table>
+<tr>
+<td width="250" valign="top">
+  <a href="https://github.com/dagster-io/talks/blob/main/slides/building-a-better-feedback-loop-data-tune-2026.pdf">
+    <img src="slides/building-a-better-feedback-loop-data-tune-2026.jpg" width="250" />
+  </a>
+</td>
+<td valign="top">
+  <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/building-a-better-feedback-loop-data-tune-2026.pdf">Slides</a><br><br>
+  Building a better feedback loop for data platforms. Presented at Data Tune 2026.
 </td>
 </tr>
 </table>
@@ -118,6 +136,21 @@ If you have any questions, you are welcome to contact us on [Slack](https://dags
 </tr>
 </table>
 
+### Deep Dive - Dagster Running Dagster: Compass
+
+<table>
+<tr>
+<td width="250" valign="top">
+  <a href="https://github.com/dagster-io/talks/blob/main/slides/dagster-running-dagster-compass.pdf">
+    <img src="slides/dagster-running-dagster-compass.jpg" width="250" />
+  </a>
+</td>
+<td valign="top">
+  <strong>🔗 Resources:</strong> <a href="https://github.com/dagster-io/talks/blob/main/slides/dagster-running-dagster-compass.pdf">Slides</a> • <a href="https://www.youtube.com/watch?v=-H2kW0ys0R8">Video</a><br><br>
+  Learn how Dagster Labs uses Dagster to power its own internal data platform with Compass.
+</td>
+</tr>
+</table>
 
 ### Deep Dive - dltHub
 
